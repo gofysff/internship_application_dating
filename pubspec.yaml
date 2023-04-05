@@ -1,0 +1,29 @@
+name: internship_app
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=2.19.3 <3.0.0"
+
+dependencies:
+  build_runner: ^2.3.3
+  flag: ^6.0.0
+  flutter:
+    sdk: flutter
+  flutter_mobx: ^2.0.6+5
+  mobx: ^2.1.4
+  mobx_codegen: ^2.1.1
+  pinput: ^2.2.31
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-VariableFont_wght.ttf
