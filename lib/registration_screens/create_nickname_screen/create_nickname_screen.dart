@@ -18,8 +18,6 @@ class CreateNicknameScreen extends StatefulWidget {
   State<CreateNicknameScreen> createState() => _CreateNicknameScreenState();
 }
 
-// TODO: create nickname res
-
 class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
