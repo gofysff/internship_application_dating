@@ -10,7 +10,6 @@ import 'res.dart';
 final RegistrationStore _registrationStore =
     RegistrationStoreSingletone.instanceOfStore;
 
-//TODO: check ?questions
 class OtpCodeScreen extends StatefulWidget {
   const OtpCodeScreen({super.key});
 
@@ -23,10 +22,8 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
   late Observer descriptionTitle = Observer(
     builder: (_) => Text(
       _registrationStore.fullPhoneNumber,
-      style: StylingTypicalTextStyles.descriptionTextStyle
-          .copyWith(fontSize: StylingFontSizes.textAfterlabel),
+      style: StylingTypicalTextStyles.descriptionTextStyleBigger,
     ),
-    // TODO: take this style to the rest of the styles
   );
 
   //TODO: change countrynomber to observalbe

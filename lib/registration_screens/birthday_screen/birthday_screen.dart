@@ -37,7 +37,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       onChanged: (value) => _registrationStore.birthday = value,
       keyboardType: TextInputType.datetime,
       decoration: const InputDecoration(
-
+          // Todo: change keyboard color
           // fillColor: Color(0xFFE5E5E5), //? why this is not working
           border: OutlineInputBorder(),
           hintStyle: TextStyle(color: StylingFontsColors.fadedColor),

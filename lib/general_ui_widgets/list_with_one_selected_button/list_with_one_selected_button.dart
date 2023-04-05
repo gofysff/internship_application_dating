@@ -30,42 +30,46 @@ class _ListWithOneSelectedButtonState extends State<ListWithOneSelectedButton> {
   late int indexSelected =
       widget.indexSelected; //? check if it's get when build
 
-  // late List<String> widgetButtons = widget.buttonsTextValues;
-
   Observer get getButtonsFromTextConfigurationWithSpaces {
     return Observer(builder: (_) {
       List<Widget> buttonsWithSpaces = [];
       if (widget.buttonsTextValues.isNotEmpty) {
-        // first element
-        buttonsWithSpaces.add(ClikableButtonFromList(
-          isFaded: _listWithOneSelectedButtonStore.selectedButtonIndex != 0,
-          text: widget.buttonsTextValues[0],
-          onPressed: () {
-            _listWithOneSelectedButtonStore.changeSelectedButtonIndex(0);
-            setState(() {});
-          },
-        ));
+        // first element of list
+        // if it's only one element in list, it will be added in any case and we will not add unnecessary SizedBox
+        buttonsWithSpaces.add(
+          ClikableButtonFromList(
+            isFaded: _listWithOneSelectedButtonStore.selectedButtonIndex != 0,
+            text: widget.buttonsTextValues[0],
+            onPressed: () {
+              _listWithOneSelectedButtonStore.changeSelectedButtonIndex(0);
+              setState(() {});
+            },
+          ),
+        );
       }
 
       if (widget.buttonsTextValues.length >= 2) {
         // all other elements
         for (var i = 1; i < widget.buttonsTextValues.length; i++) {
-          buttonsWithSpaces
-              .add(const SizedBox(height: distanceBeetweenButtons));
-          buttonsWithSpaces.add(ClikableButtonFromList(
+          buttonsWithSpaces.add(
+            const SizedBox(height: distanceBeetweenButtons),
+          );
+          buttonsWithSpaces.add(
+            ClikableButtonFromList(
               isFaded: i != _listWithOneSelectedButtonStore.selectedButtonIndex,
               text: widget.buttonsTextValues[i],
               onPressed: () {
                 _listWithOneSelectedButtonStore.changeSelectedButtonIndex(i);
                 setState(() {});
-              }));
+              },
+            ),
+          );
         }
       }
       return Column(children: buttonsWithSpaces);
     });
   }
 
-  // TODO: ask how this is awful
   @override
   Widget build(BuildContext context)
   // return Column with buttons what is separated SizedBox with distanceBeetweenButtons

@@ -63,6 +63,10 @@ class StylingTypicalTextStyles {
     color: StylingFontsColors.mainTextColor,
   );
 
+  static TextStyle descriptionTextStyleBigger = StylingTypicalTextStyles
+      .descriptionTextStyle
+      .copyWith(fontSize: StylingFontSizes.textAfterlabel);
+
   static TextStyle descriptionTextStyleFaded = const TextStyle(
     fontFamily: mainFontApplication,
     fontSize: StylingFontSizes.descriptionFontSize,

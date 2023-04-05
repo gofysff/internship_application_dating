@@ -62,7 +62,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   },
                   decoration: const InputDecoration(focusColor: Colors.black
 
-                      //TODO: ask why focusColor not working?
                       //? why focusColor not working?
                       ),
                   keyboardType: TextInputType.phone,

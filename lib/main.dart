@@ -20,7 +20,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        // TODO: move routes into class string static value
         '/': (context) => const StartScreen(),
         PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
         OtpCodeScreen.routename: (context) => const OtpCodeScreen(),
@@ -35,6 +34,8 @@ class MainApp extends StatelessWidget {
   }
 }
 
+// TODO: try to make our screens lighter and more beautiful \ avoid using so many variables in state and try to make build method more clear
+// TODO: work with RegistrationStore
 
 // TODO: try to figure out how customize correctly the keyboard 
-//(colors what we need)
+
