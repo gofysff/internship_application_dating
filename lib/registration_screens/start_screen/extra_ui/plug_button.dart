@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../styling.dart';
+import 'package:internship_app/styling.dart';
 
 class PlugButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -15,7 +14,7 @@ class PlugButton extends StatelessWidget {
       width: 100,
       height: 32,
       decoration: BoxDecoration(
-        color: const Color(0xffF2F2F2),
+        color: StylingFiguresColors.plugButtonBackground,
         borderRadius: BorderRadius.circular(32),
       ),
       child: TextButton(
@@ -25,7 +24,7 @@ class PlugButton extends StatelessWidget {
           width: 20,
           height: 20,
           decoration: const BoxDecoration(
-            color: kElipsesColor,
+            color: StylingFiguresColors.elipsesColor,
             shape: BoxShape.circle,
           ),
         ),

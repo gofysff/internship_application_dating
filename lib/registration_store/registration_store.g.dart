@@ -53,13 +53,13 @@ mixin _$RegistrationStore on RegistrationStoreBase, Store {
       Atom(name: 'RegistrationStoreBase.otpCode', context: context);
 
   @override
-  int get otpCode {
+  String? get otpCode {
     _$otpCodeAtom.reportRead();
     return super.otpCode;
   }
 
   @override
-  set otpCode(int value) {
+  set otpCode(String? value) {
     _$otpCodeAtom.reportWrite(value, super.otpCode, () {
       super.otpCode = value;
     });

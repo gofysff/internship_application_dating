@@ -11,6 +11,8 @@ import 'res.dart';
 class ShowYouScreen extends StatefulWidget {
   const ShowYouScreen({super.key});
 
+  static const routeName = '/show_you_screen';
+
   @override
   State<ShowYouScreen> createState() => _ShowYouScreenState();
 }
@@ -20,14 +22,13 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
       RegistrationStoreSingletone.instanceOfStore;
   Text label = Text(ShowYouScreenRes.labelText, style: kTitleTextStyle);
 
-  late MainSwitchScreenButton buttonToNextScreen = MainSwitchScreenButton(
+  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
       text: ShowYouScreenRes.mainSwitchButtonText,
       onPressed: () {
         //  Todo: add navigation to the next screen
         _registrationStore.showYou = genderList.getSelectedButtonValue;
 
-        String testPrint = _registrationStore.toString();
-        print(testPrint);
+        print(_registrationStore.toString());
       });
 
   IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
@@ -42,37 +43,40 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: generalAppBarRegistration,
-        body: Column(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  indicatorProgressBar,
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 32),
-                            label,
-                            const SizedBox(height: 32),
-                            genderList
-                          ]))
-                ],
+      appBar: generalAppBarRegistration,
+      body: Column(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Column(
+              children: [
+                indicatorProgressBar,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 32),
+                      label,
+                      const SizedBox(height: 32),
+                      genderList
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: buttonToNextScreen,
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: buttonToNextScreen,
-                ),
-              ),
-            )
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 }

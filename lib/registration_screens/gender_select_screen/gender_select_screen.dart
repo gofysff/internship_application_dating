@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:internship_app/registration_screens/show_u_screen/show_u_screen.dart';
 
 import '../../general_ui_widgets/ask_user_button/ask_user_button.dart';
 import '../../general_ui_widgets/general_app_bar_registration.dart';
@@ -13,6 +14,8 @@ import 'res.dart';
 class GenderSelectScreen extends StatefulWidget {
   const GenderSelectScreen({super.key});
 
+  static const String routeName = '/gender_select_screen';
+
   @override
   State<GenderSelectScreen> createState() => _GenderSelectScreenState();
 }
@@ -24,12 +27,13 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
   Text label = Text(GenderSelectScreenRes.labelText, style: kTitleTextStyle);
 
   Text beneathLabel = Text(GenderSelectScreenRes.textBeneathLabel,
-      style: kDescriptionTextStyle.copyWith(color: kFadedColor));
+      style:
+          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
 
-  late MainSwitchScreenButton buttonToNextScreen = MainSwitchScreenButton(
+  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
     text: GenderSelectScreenRes.mainSwitchButtonText,
     onPressed: () {
-      Navigator.pushNamed(context, '/show_u_screen');
+      Navigator.pushNamed(context, ShowYouScreen.routeName);
       _registrationStore.gender = genderList.getSelectedButtonValue;
       _registrationStore.showGenderOnProfile = askUserButton.isPressed;
     },

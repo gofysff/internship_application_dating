@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:internship_app/registration_screens/phone_number_screen/phone_number_screen.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
 import '../../styling.dart';
@@ -12,24 +13,25 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainSwitchScreenButton buttonToNextScreen = MainSwitchScreenButton(
+    SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
       text: StartScreenRes.mainButtonText,
-      onPressed: () => Navigator.pushNamed(context, '/phone_number_screen'),
+      onPressed: () =>
+          Navigator.pushNamed(context, PhoneNumberScreen.routeName),
     );
 
     Column features = Column(
       children: const [
-        Feature(
+        FeatureWidget(
           titleText: StartScreenRes.title1,
           descriptionText: StartScreenRes.description1,
         ),
         SizedBox(height: 28),
-        Feature(
+        FeatureWidget(
           titleText: StartScreenRes.title2,
           descriptionText: StartScreenRes.description2,
         ),
         SizedBox(height: 28),
-        Feature(
+        FeatureWidget(
           titleText: StartScreenRes.title3,
           descriptionText: StartScreenRes.description3,
         ),
@@ -43,7 +45,7 @@ class StartScreen extends StatelessWidget {
           width: 52,
           height: 52,
           decoration: const BoxDecoration(
-            color: kElipsesColor,
+            color: StylingFiguresColors.elipsesColor,
             shape: BoxShape.circle,
           ),
         ),
@@ -76,16 +78,17 @@ class StartScreen extends StatelessWidget {
       ],
     );
     return SafeArea(
-        child: Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [upperPart, features, lowerPart],
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [upperPart, features, lowerPart],
+            ),
           ),
         ),
       ),
-    )); // TODO: don't forget to add comma
+    );
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../styling.dart';
 
-class Feature extends StatelessWidget {
-  const Feature({
+class FeatureWidget extends StatelessWidget {
+  const FeatureWidget({
     Key? key,
     required this.titleText,
     required this.descriptionText,
@@ -21,26 +21,29 @@ class Feature extends StatelessWidget {
           width: 20,
           height: 20,
           decoration: const BoxDecoration(
-            color: kElipsesColor,
+            color: StylingFiguresColors.elipsesColor,
             shape: BoxShape.circle,
           ),
         ),
         const SizedBox(width: 16),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(titleText,
-              softWrap: true,
-              style: const TextStyle(
-                fontFamily: kMainFont,
-                fontSize: kButtonTextFontSize,
-                fontWeight: FontWeight.w700,
-                color: kMainTextColor,
-              )),
-          SizedBox(
-            width: MediaQuery.of(context).size.width - 100,
-            child: Text(descriptionText,
-                softWrap: true, style: kDescriptionTextStyle),
-          ),
-        ]),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(titleText,
+                softWrap: true,
+                style: const TextStyle(
+                  fontFamily: kMainFont,
+                  fontSize: kButtonTextFontSize,
+                  fontWeight: FontWeight.w700,
+                  color: StylingFontsColors.mainTextColor,
+                )),
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 100,
+              child: Text(descriptionText,
+                  softWrap: true, style: kDescriptionTextStyle),
+            ),
+          ],
+        ),
       ],
     );
   }

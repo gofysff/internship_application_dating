@@ -3,8 +3,8 @@ import '../styling.dart';
 
 /// This button is used in all screens
 /// usually for switching to the next screen
-class MainSwitchScreenButton extends StatelessWidget {
-  const MainSwitchScreenButton(
+class SwitchScreenButton extends StatelessWidget {
+  const SwitchScreenButton(
       {super.key,
       required this.text,
       required this.onPressed,
@@ -19,24 +19,25 @@ class MainSwitchScreenButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        // foregroundColor:
-        //     isFaded == false ? kMainButtonTextColor : const Color(0xffEAEAEA),
-        backgroundColor:
-            isFaded == false ? kMainButtonsColor : const Color(0xffEAEAEA),
-        //  wider as possible
+        backgroundColor: isFaded == false
+            ? StylingFiguresColors.switchScreenButtonColor
+            : StylingFiguresColors.switchScreenButtonColorFaded,
         minimumSize: const Size(double.infinity, 49),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32.0),
         ),
       ),
-      child: Text(text,
-          style: TextStyle(
-              fontFamily: kMainFont,
-              fontSize: kButtonTextFontSize,
-              fontWeight: FontWeight.w400,
-              color: isFaded == false
-                  ? kMainButtonSwitchTextColor
-                  : const Color(0xffA4A4A4))),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: kMainFont,
+          fontSize: kButtonTextFontSize,
+          fontWeight: FontWeight.w400,
+          color: isFaded == false
+              ? StylingFontsColors.switchScreenFontColor
+              : StylingFontsColors.switchScreenFontColorFaded,
+        ),
+      ),
     );
   }
 }

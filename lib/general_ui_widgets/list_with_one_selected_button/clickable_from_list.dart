@@ -26,7 +26,9 @@ class _ClikableButtonFromListState extends State<ClikableButtonFromList> {
         onPressed: widget.onPressed,
         style: ElevatedButton.styleFrom(
           side: BorderSide(
-              color: widget.isFaded == false ? Colors.black : kFadedColor,
+              color: widget.isFaded == false
+                  ? Colors.black
+                  : StylingFontsColors.fadedColor,
               width: 1),
           backgroundColor: Colors.white,
           //  wider as possible
@@ -41,7 +43,9 @@ class _ClikableButtonFromListState extends State<ClikableButtonFromList> {
               fontFamily: kMainFont,
               fontSize: kButtonTextFontSize,
               fontWeight: FontWeight.w400,
-              color: widget.isFaded == false ? Colors.black : kFadedColor),
+              color: widget.isFaded == false
+                  ? Colors.black
+                  : StylingFontsColors.fadedColor),
         ));
   }
 }

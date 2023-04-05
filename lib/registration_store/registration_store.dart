@@ -20,7 +20,7 @@ abstract class RegistrationStoreBase with Store {
   String get fullPhoneNumber => countryNumber + phoneNumber;
 
   @observable
-  int otpCode = -1; // TODO: make it nullable
+  String? otpCode;
 
   @observable
   String firstName = "";
@@ -43,5 +43,3 @@ abstract class RegistrationStoreBase with Store {
   @observable
   bool showGenderOnProfile = true;
 }
-
-// TODO: 

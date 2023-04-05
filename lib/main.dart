@@ -23,13 +23,18 @@ class MainApp extends StatelessWidget {
         // TODO: move routes into class string static value
         '/': (context) => const StartScreen(),
         PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
-        '/otp_code_screen': (context) => const OTPcodeScreen(),
-        '/first_name_screen': (context) => const FirstNameScreen(),
-        '/birthday_screen': (context) => const BirthdayScreen(),
-        '/create_nickname_screen': (context) => const CreateNicknameScreen(),
-        '/gender_select_screen': (context) => const GenderSelectScreen(),
-        '/show_u_screen': (context) => const ShowYouScreen(),
+        OtpCodeScreen.routename: (context) => const OtpCodeScreen(),
+        FirstNameScreen.routename: (context) => const FirstNameScreen(),
+        BirthdayScreen.routeName: (context) => const BirthdayScreen(),
+        CreateNicknameScreen.routename: (context) =>
+            const CreateNicknameScreen(),
+        GenderSelectScreen.routeName: (context) => const GenderSelectScreen(),
+        ShowYouScreen.routeName: (context) => const ShowYouScreen(),
       },
     );
   }
 }
+
+
+// TODO: try to figure out how customize correctly the keyboard 
+//(colors what we need)
