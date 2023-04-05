@@ -8,7 +8,6 @@ import '../../styling.dart';
 import 'res.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
-
   static const String routeName = '/phone_number_screen';
 
   const PhoneNumberScreen({super.key});
@@ -34,43 +33,46 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         Navigator.pushNamed(context, '/otp_code_screen');
       });
 
-  late Column inputNumberPanel =
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text(PhoneNumberScreenRes.textAboveButtonToKeyboard,
-        style: kDescriptionTextStyle),
-    Container(
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 241, 240, 240),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey)),
-      child: Row(children: [
-        const SizedBox(width: 12),
-        Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
-        const SizedBox(width: 8),
-        Text('+', style: kDescriptionTextStyle),
-        Text('7', style: kDescriptionTextStyle),
-        const SizedBox(width: 30),
-        SizedBox(
-          width: widthOfScreen - 106 - 16 * 2,
-          child: Observer(
-            builder: (_) => TextField(
-              onChanged: (String inputString) {
-                _registrationStore.phoneNumber = inputString;
-              },
-              decoration: const InputDecoration(focusColor: Colors.black
+  late Column inputNumberPanel = Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(PhoneNumberScreenRes.textAboveButtonToKeyboard,
+          style: kDescriptionTextStyle),
+      Container(
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 241, 240, 240),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.grey)),
+        child: Row(children: [
+          const SizedBox(width: 12),
+          Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
+          const SizedBox(width: 8),
+          Text('+', style: kDescriptionTextStyle),
+          Text('7', style: kDescriptionTextStyle),
+          const SizedBox(width: 30),
+          SizedBox(
+            width: widthOfScreen - 106 - 16 * 2,
+            child: Observer(
+              builder: (_) => TextField(
+                onChanged: (String inputString) {
+                  _registrationStore.phoneNumber = inputString;
+                },
+                decoration: const InputDecoration(focusColor: Colors.black
 
-                  //TODO: ask why focusColor not working?
-                  //? why focusColor not working?
-                  ),
-              keyboardType: TextInputType.phone,
+                    //TODO: ask why focusColor not working?
+                    //? why focusColor not working?
+                    ),
+                keyboardType: TextInputType.phone,
+                // cursorColor: , // TODO check this option for styling
+              ),
             ),
-          ),
-        )
-      ]),
-    ),
-    const SizedBox(height: 16),
-    buttonToNextScreen,
-  ]);
+          )
+        ]),
+      ),
+      const SizedBox(height: 16),
+      buttonToNextScreen,
+    ],
+  );
 
   RichText privacyPolicy = RichText(
     text: TextSpan(
@@ -89,6 +91,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       ],
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     widthOfScreen = MediaQuery.of(context).size.width;
