@@ -30,8 +30,8 @@ class SwitchScreenButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontFamily: kMainFont,
-          fontSize: kButtonTextFontSize,
+          fontFamily: StylingTypicalTextStyles.mainFontApplication,
+          fontSize: StylingFontSizes.buttonTextFontSize,
           fontWeight: FontWeight.w400,
           color: isFaded == false
               ? StylingFontsColors.switchScreenFontColor

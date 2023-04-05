@@ -24,11 +24,11 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(GenderSelectScreenRes.labelText, style: kTitleTextStyle);
+  Text label = Text(GenderSelectScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
 
   Text beneathLabel = Text(GenderSelectScreenRes.textBeneathLabel,
-      style:
-          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
+      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
 
   late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
     text: GenderSelectScreenRes.mainSwitchButtonText,

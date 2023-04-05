@@ -20,10 +20,11 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(BirthdayScreenRes.labelText, style: kTitleTextStyle);
+  Text label = Text(BirthdayScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
+
   Text beneathInputField = Text(BirthdayScreenRes.textBeneathInputField,
-      style:
-          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
+      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
 
   late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
       text: BirthdayScreenRes.mainSwitchButtonText,

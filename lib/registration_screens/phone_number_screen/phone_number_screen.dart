@@ -23,7 +23,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
   late double widthOfScreen;
   late double heightOfScreen;
-  Text title = Text(PhoneNumberScreenRes.labelText, style: kTitleTextStyle);
+  Text label = Text(PhoneNumberScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
 
   // panel where user input phone number
   late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
@@ -37,7 +38,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(PhoneNumberScreenRes.textAboveButtonToKeyboard,
-          style: kDescriptionTextStyle),
+          style: StylingTypicalTextStyles.descriptionTextStyle),
       Container(
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 241, 240, 240),
@@ -48,14 +49,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             const SizedBox(width: 12),
             Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
             const SizedBox(width: 8),
-            Text('+', style: kDescriptionTextStyle),
-            Text('7', style: kDescriptionTextStyle),
+            Text('+', style: StylingTypicalTextStyles.descriptionTextStyle),
+            Text('7', style: StylingTypicalTextStyles.descriptionTextStyle),
             const SizedBox(width: 30),
             SizedBox(
               width: widthOfScreen - 106 - 16 * 2,
               child: Observer(
                 builder: (_) => TextField(
-                  cursorColor: OtherColors.coursorTextKeyboardColor,
+                  cursorColor: StylingOtherColors.coursorTextKeyboardColor,
                   onChanged: (String inputString) {
                     _registrationStore.phoneNumber = inputString;
                   },
@@ -80,16 +81,18 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   RichText privacyPolicy = RichText(
     text: TextSpan(
       text: PhoneNumberScreenRes.aboutPrivacyPolicy,
-      style: kFadedTextStyle,
+      style: StylingTypicalTextStyles.fadedSlightTextStyle,
       children: [
         TextSpan(
           text: PhoneNumberScreenRes.textWithLinkToPrivacyPolicy,
-          style: kFadedTextStyle.copyWith(color: Colors.black),
+          style: StylingTypicalTextStyles.fadedSlightTextStyle
+              .copyWith(color: Colors.black),
         ),
         const TextSpan(text: PhoneNumberScreenRes.andText),
         TextSpan(
           text: PhoneNumberScreenRes.textWithLinkToUserAgreement,
-          style: kFadedTextStyle.copyWith(color: Colors.black),
+          style: StylingTypicalTextStyles.fadedSlightTextStyle
+              .copyWith(color: Colors.black),
         ),
       ],
     ),
@@ -114,7 +117,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 const SizedBox(
                   height: 75,
                 ),
-                title,
+                label,
                 const SizedBox(height: 62),
                 Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,

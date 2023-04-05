@@ -24,17 +24,16 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(CreateNicknameScreenRes.labelText, style: kTitleTextStyle);
+  Text label = Text(CreateNicknameScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
 
   Text beneathInputField1 = Text(CreateNicknameScreenRes.textBeneathInputField1,
-      style:
-          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
+      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
   Text beneathInputField2 = Text(CreateNicknameScreenRes.textBeneathInputField2,
-      style:
-          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
+      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
 
   Text askToShowRealName = Text(CreateNicknameScreenRes.askToShowRealName,
-      style: kDescriptionTextStyle);
+      style: StylingTypicalTextStyles.descriptionTextStyle);
 
   AskUserButton askUserButton =
       const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);

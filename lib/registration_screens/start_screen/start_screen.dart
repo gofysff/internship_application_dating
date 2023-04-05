@@ -52,12 +52,12 @@ class StartScreen extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           StartScreenRes.labelText,
-          style: kTitleTextStyle,
+          style: StylingTypicalTextStyles.labelTextStyle,
         ),
         const SizedBox(height: 8),
         Text(
           StartScreenRes.underLabelText,
-          style: kDescriptionTextStyle,
+          style: StylingTypicalTextStyles.descriptionTextStyleFaded,
         ),
       ],
     );

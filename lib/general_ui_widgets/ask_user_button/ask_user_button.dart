@@ -39,11 +39,12 @@ class _AskUserButtonState extends State<AskUserButton> {
                 : const Icon(Icons.check_box_outline_blank,
                     color: StylingFontsColors.fadedColor),
             const SizedBox(width: 16),
-            Text(widget.text,
-                style: kDescriptionTextStyle.copyWith(
-                    color: _askUserButtonStore.isPressed
-                        ? StylingFontsColors.fadedColor
-                        : Colors.black)),
+            Text(
+              widget.text,
+              style: _askUserButtonStore.isPressed
+                  ? StylingTypicalTextStyles.descriptionTextStyleFaded
+                  : StylingTypicalTextStyles.descriptionTextStyle,
+            )
           ],
         ),
       ),

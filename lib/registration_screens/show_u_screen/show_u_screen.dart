@@ -20,16 +20,20 @@ class ShowYouScreen extends StatefulWidget {
 class _ShowYouScreenState extends State<ShowYouScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
-  Text label = Text(ShowYouScreenRes.labelText, style: kTitleTextStyle);
+
+  Text label = Text(
+    ShowYouScreenRes.labelText,
+    style: StylingTypicalTextStyles.labelTextStyle,
+  );
 
   late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-      text: ShowYouScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        //  Todo: add navigation to the next screen
-        _registrationStore.showYou = genderList.getSelectedButtonValue;
-
-        print(_registrationStore.toString());
-      });
+    text: ShowYouScreenRes.mainSwitchButtonText,
+    onPressed: () {
+      //  Todo: add navigation to the next screen
+      _registrationStore.showYou = genderList.getSelectedButtonValue;
+      print(_registrationStore.toString());
+    },
+  );
 
   IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
     currentStep: ShowYouScreenRes.currentProgress,

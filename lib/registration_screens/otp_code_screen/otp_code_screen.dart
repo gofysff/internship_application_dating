@@ -23,13 +23,16 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
   late Observer descriptionTitle = Observer(
     builder: (_) => Text(
       _registrationStore.fullPhoneNumber,
-      style: kDescriptionTextStyle.copyWith(fontSize: 16),
+      style: StylingTypicalTextStyles.descriptionTextStyle
+          .copyWith(fontSize: StylingFontSizes.textAfterlabel),
     ),
+    // TODO: take this style to the rest of the styles
   );
 
   //TODO: change countrynomber to observalbe
 
-  Text lable = Text(OtpCodeScreenRes.labelText, style: kTitleTextStyle);
+  Text lable = Text(OtpCodeScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
 
   //TODO: specify the time when the user can get the sms again
   // Timer should use it when we send the sms
@@ -41,7 +44,8 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
     OtpCodeScreenRes.getSmsAgain1 +
         seconds.toString() +
         OtpCodeScreenRes.getSmsAgain2,
-    style: kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor),
+    style: StylingTypicalTextStyles.descriptionTextStyle
+        .copyWith(color: StylingFontsColors.fadedColor),
   );
 
   @override

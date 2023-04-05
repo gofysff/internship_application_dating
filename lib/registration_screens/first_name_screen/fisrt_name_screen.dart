@@ -23,10 +23,11 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text lable = Text(FirstNameScreenRes.labelText, style: kTitleTextStyle);
+  Text lable = Text(FirstNameScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
+
   Text beneathInputField = Text(FirstNameScreenRes.textBeneathInputField,
-      style:
-          kDescriptionTextStyle.copyWith(color: StylingFontsColors.fadedColor));
+      style: StylingTypicalTextStyles.fadedSlightTextStyle);
 
   late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
       text: FirstNameScreenRes.mainSwitchButtonText,
@@ -36,7 +37,7 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
 
   late Observer keyboard = Observer(
     builder: (_) => TextField(
-      cursorColor: OtherColors.coursorTextKeyboardColor,
+      cursorColor: StylingOtherColors.coursorTextKeyboardColor,
       onChanged: (value) => _registrationStore.firstName = value,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),

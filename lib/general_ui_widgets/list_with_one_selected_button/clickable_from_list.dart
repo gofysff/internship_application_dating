@@ -40,8 +40,8 @@ class _ClikableButtonFromListState extends State<ClikableButtonFromList> {
         child: Text(
           widget.text,
           style: TextStyle(
-              fontFamily: kMainFont,
-              fontSize: kButtonTextFontSize,
+              fontFamily: StylingTypicalTextStyles.mainFontApplication,
+              fontSize: StylingFontSizes.buttonTextFontSize,
               fontWeight: FontWeight.w400,
               color: widget.isFaded == false
                   ? Colors.black

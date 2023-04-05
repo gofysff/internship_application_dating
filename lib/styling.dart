@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: remove k prefix and wrap colors and others into class with static fields
-// colors
+// TODO: spend time on dividing TextStyles and ask if it makes sense
 
 class StylingFiguresColors {
   static const plugButtonBackground = Color(0xffF2F2F2);
@@ -25,35 +24,49 @@ class StylingFontsColors {
 }
 // typicall font sizes
 
-class OtherColors {
+class StylingOtherColors {
   static const Color coursorTextKeyboardColor = Colors.black;
 }
 
-const double kTitleFontSize = 24;
-const double kDescriptionFontSize = 14;
-const double kButtonTextFontSize = 18;
+class StylingFontSizes {
+  static const double titleFontSize = 24;
+  static const double descriptionFontSize = 14;
 
-// font Manrope from Google Fonts
-const String kMainFont = 'Manrope';
+  static const double textAfterlabel = 16;
+  static const double buttonTextFontSize = 18;
+}
 
-// typical text styles for titles
-TextStyle kTitleTextStyle = const TextStyle(
-  fontFamily: kMainFont,
-  fontSize: kTitleFontSize,
-  fontWeight: FontWeight.bold,
-  color: StylingFontsColors.mainTextColor,
-);
+class StylingTypicalTextStyles {
+  // font Manrope from Google Fonts
+  static const String mainFontApplication = 'Manrope';
 
-TextStyle kFadedTextStyle = const TextStyle(
-  fontFamily: kMainFont,
-  fontSize: kDescriptionFontSize,
-  fontWeight: FontWeight.w400,
-  color: StylingFontsColors.fadedColor,
-);
+// typical text styles for labels
+  static TextStyle labelTextStyle = const TextStyle(
+    fontFamily: mainFontApplication,
+    fontSize: StylingFontSizes.titleFontSize,
+    fontWeight: FontWeight.bold,
+    color: StylingFontsColors.mainTextColor,
+  );
 
-TextStyle kDescriptionTextStyle = const TextStyle(
-  fontFamily: kMainFont,
-  fontSize: kDescriptionFontSize,
-  fontWeight: FontWeight.w400,
-  color: StylingFontsColors.mainTextColor,
-);
+  /// used for text in the middle of the screen(not the most important)
+  static TextStyle fadedSlightTextStyle = const TextStyle(
+    fontFamily: mainFontApplication,
+    fontSize: StylingFontSizes.descriptionFontSize,
+    fontWeight: FontWeight.w400,
+    color: StylingFontsColors.fadedColor,
+  );
+
+  static TextStyle descriptionTextStyle = const TextStyle(
+    fontFamily: mainFontApplication,
+    fontSize: StylingFontSizes.descriptionFontSize,
+    fontWeight: FontWeight.w400,
+    color: StylingFontsColors.mainTextColor,
+  );
+
+  static TextStyle descriptionTextStyleFaded = const TextStyle(
+    fontFamily: mainFontApplication,
+    fontSize: StylingFontSizes.descriptionFontSize,
+    fontWeight: FontWeight.w400,
+    color: StylingFontsColors.fadedColor,
+  );
+}
