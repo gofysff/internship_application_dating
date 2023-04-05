@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// TODO: remove k prefix and wrap colors and others into class with static fields
 // colors
 const Color kbackgroundColor = Color(0xffCECECE);
 const Color kElipsesColor = Color(0xffD9D9D9);

@@ -20,11 +20,16 @@ class OTPcodeScreen extends StatefulWidget {
 
 class _OTPcodeScreenState extends State<OTPcodeScreen> {
   late Observer descriptionTitle = Observer(
-      builder: (_) => Text(_registrationStore.fullPhoneNumber,
-          style: kDescriptionTextStyle.copyWith(fontSize: 16)));
+    builder: (_) => Text(
+      _registrationStore.fullPhoneNumber,
+      style: kDescriptionTextStyle.copyWith(fontSize: 16),
+    ),
+  );
+
   //TODO: change countrynomber to observalbe
 
   Text lable = Text(OTPcodeScreenRes.labelText, style: kTitleTextStyle);
+
   //TODO: specify the time when the user can get the sms again
   // Timer should use it when we send the sms
   //? I guess it's not the best way to do it
@@ -32,10 +37,12 @@ class _OTPcodeScreenState extends State<OTPcodeScreen> {
   // or maybe it will be better to use FutureBuilder
   int seconds = 60;
   late Text getSmsAgainText = Text(
-      OTPcodeScreenRes.getSmsAgain1 +
-          seconds.toString() +
-          OTPcodeScreenRes.getSmsAgain2,
-      style: kDescriptionTextStyle.copyWith(color: kFadedColor));
+    OTPcodeScreenRes.getSmsAgain1 +
+        seconds.toString() +
+        OTPcodeScreenRes.getSmsAgain2,
+    style: kDescriptionTextStyle.copyWith(color: kFadedColor),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +78,7 @@ class FilledRoundedPinPut extends StatefulWidget {
 
 class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
   final controller = TextEditingController();
-  final focusNode = FocusNode();
+  final focusNode = FocusNode(); // TODO: Understand what is it
 
   @override
   void dispose() {
@@ -84,6 +91,8 @@ class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
 
   @override
   Widget build(BuildContext context) {
+
+    // TODO: remove from build menthod
     const length = 5;
     const borderColor = Color.fromRGBO(169, 169, 169, 1);
     const errorColor = Color.fromRGBO(255, 234, 238, 1);
@@ -111,7 +120,7 @@ class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
           controller: controller,
           focusNode: focusNode,
           defaultPinTheme: defaultPinTheme,
-          onCompleted: (pin) {
+          onCompleted: (String pin) {
             _registrationStore.otpCode = int.parse(pin);
             // TODO: what type is better?
 

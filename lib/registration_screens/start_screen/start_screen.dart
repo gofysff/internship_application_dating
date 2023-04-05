@@ -13,24 +13,26 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainSwitchScreenButton buttonToNextScreen = MainSwitchScreenButton(
-        text: StartScreenRes.mainButtonText,
-        onPressed: () {
-          Navigator.pushNamed(context, '/phone_number_screen');
-        });
+      text: StartScreenRes.mainButtonText,
+      onPressed: () => Navigator.pushNamed(context, '/phone_number_screen'),
+    );
 
     Column features = Column(
       children: const [
         Feature(
-            titleText: StartScreenRes.title1,
-            descriptionText: StartScreenRes.description1),
+          titleText: StartScreenRes.title1,
+          descriptionText: StartScreenRes.description1,
+        ),
         SizedBox(height: 28),
         Feature(
-            titleText: StartScreenRes.title2,
-            descriptionText: StartScreenRes.description2),
+          titleText: StartScreenRes.title2,
+          descriptionText: StartScreenRes.description2,
+        ),
         SizedBox(height: 28),
         Feature(
-            titleText: StartScreenRes.title3,
-            descriptionText: StartScreenRes.description3),
+          titleText: StartScreenRes.title3,
+          descriptionText: StartScreenRes.description3,
+        ),
       ],
     );
 
@@ -84,6 +86,6 @@ class StartScreen extends StatelessWidget {
           ),
         ),
       ),
-    ));
+    )); // TODO: don't forget to add comma
   }
 }

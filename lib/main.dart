@@ -20,8 +20,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        // TODO: move routes into class string static value
         '/': (context) => const StartScreen(),
-        '/phone_number_screen': (context) => const PhoneNumberScreen(),
+        PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
         '/otp_code_screen': (context) => const OTPcodeScreen(),
         '/first_name_screen': (context) => const FirstNameScreen(),
         '/birthday_screen': (context) => const BirthdayScreen(),

@@ -25,13 +25,15 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
 
   Text beneathLabel = Text(GenderSelectScreenRes.textBeneathLabel,
       style: kDescriptionTextStyle.copyWith(color: kFadedColor));
+
   late MainSwitchScreenButton buttonToNextScreen = MainSwitchScreenButton(
-      text: GenderSelectScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        Navigator.pushNamed(context, '/show_u_screen');
-        _registrationStore.gender = genderList.getSelectedButtonValue;
-        _registrationStore.showGenderOnProfile = askUserButton.isPressed;
-      });
+    text: GenderSelectScreenRes.mainSwitchButtonText,
+    onPressed: () {
+      Navigator.pushNamed(context, '/show_u_screen');
+      _registrationStore.gender = genderList.getSelectedButtonValue;
+      _registrationStore.showGenderOnProfile = askUserButton.isPressed;
+    },
+  );
 
   ListWithOneSelectedButton genderList = const ListWithOneSelectedButton(
     buttonsTextValues: GenderSelectScreenRes.buttonValues,
@@ -45,46 +47,56 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
   IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
       currentStep: GenderSelectScreenRes.currentProgress,
       totalSteps: GenderSelectScreenRes.maxProgress);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: generalAppBarRegistration,
-        body: Column(
+      appBar: generalAppBarRegistration,
+      body: getBody(),
+    );
+  }
+
+  Widget getBody() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Column(
+            children: [
+              indicatorProgressBar,
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 32),
+                        label,
+                        const SizedBox(height: 19),
+                        beneathLabel,
+                        const SizedBox(height: 32),
+                        genderList
+                      ]))
+            ],
+          ),
+        ),
+        getSomething(),
+      ],
+    );
+  }
+
+  Widget getSomething() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  indicatorProgressBar,
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 32),
-                            label,
-                            const SizedBox(height: 19),
-                            beneathLabel,
-                            const SizedBox(height: 32),
-                            genderList
-                          ]))
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    askUserButton,
-                    const SizedBox(height: 20),
-                    buttonToNextScreen,
-                  ],
-                ),
-              ),
-            )
+            askUserButton,
+            const SizedBox(height: 20),
+            buttonToNextScreen,
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

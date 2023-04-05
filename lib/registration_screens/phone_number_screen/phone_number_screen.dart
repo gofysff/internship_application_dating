@@ -8,6 +8,9 @@ import '../../styling.dart';
 import 'res.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
+
+  static const String routeName = '/phone_number_screen';
+
   const PhoneNumberScreen({super.key});
 
   @override

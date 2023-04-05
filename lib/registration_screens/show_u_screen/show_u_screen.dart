@@ -31,12 +31,14 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
       });
 
   IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
-      currentStep: ShowYouScreenRes.currentProgress,
-      totalSteps: ShowYouScreenRes.maxProgress);
+    currentStep: ShowYouScreenRes.currentProgress,
+    totalSteps: ShowYouScreenRes.maxProgress,
+  );
 
   ListWithOneSelectedButton genderList = const ListWithOneSelectedButton(
     buttonsTextValues: ShowYouScreenRes.buttonValues,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

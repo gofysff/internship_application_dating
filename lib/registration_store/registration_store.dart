@@ -20,7 +20,7 @@ abstract class RegistrationStoreBase with Store {
   String get fullPhoneNumber => countryNumber + phoneNumber;
 
   @observable
-  int otpCode = -1;
+  int otpCode = -1; // TODO: make it nullable
 
   @observable
   String firstName = "";
