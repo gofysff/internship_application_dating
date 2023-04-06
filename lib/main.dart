@@ -34,9 +34,10 @@ class MainApp extends StatelessWidget {
   }
 }
 
-// TODO: try to make our screens lighter and more beautiful \ avoid using so many variables in state and try to make build method more clear
-// TODO: work with RegistrationStore
+// TODO: 1: try to figure out why in show_u screen and gender_select_screen genderList doesn't give us the correct value from the store(method is getSelectedButtonValue)
 
-// TODO: try to figure out how customize correctly the keyboard 
+// TODO: 2 try to figure out how customize correctly the keyboard 
+// TODO: 3 specify information about otp timer work
 
-// TODO: try to figure out why in show_u screen and gender_select_screen genderList doesn't give us the correct value from the store(method is getSelectedButtonValue)
+// TODO: 4: work with RegistrationStore (pre-processing data from the keyboards)
+

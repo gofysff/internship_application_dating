@@ -14,21 +14,21 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [upperPart, featuresPart, getLowerPart(context)],
-            ),
-          ),
-        ),
-      ),
+      child: Scaffold(body: bodyOfTheScreen(context)),
     );
   }
 
-  Widget get upperPart => Column(
+  Widget bodyOfTheScreen(BuildContext context) => Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [upperBodyPart, featuresPart, getLowerBodyPart(context)],
+          ),
+        ),
+      );
+
+  Widget get upperBodyPart => Column(
         children: [
           Container(
             //   just simple circle with no functionality 20*20
@@ -71,13 +71,9 @@ class StartScreen extends StatelessWidget {
         ],
       );
 
-  Widget getLowerPart(BuildContext context) => Column(
+  Widget getLowerBodyPart(BuildContext context) => Column(
         children: [
-          SwitchScreenButton(
-            text: StartScreenRes.mainButtonText,
-            onPressed: () =>
-                Navigator.pushNamed(context, PhoneNumberScreen.routeName),
-          ),
+          getSwitchScreenButton(context),
           const SizedBox(height: 12),
           Row(
             children: const [
@@ -89,5 +85,13 @@ class StartScreen extends StatelessWidget {
             ],
           ),
         ],
+      );
+
+  // smallest parts of the screen
+  SwitchScreenButton getSwitchScreenButton(BuildContext context) =>
+      SwitchScreenButton(
+        text: StartScreenRes.mainButtonText,
+        onPressed: () =>
+            Navigator.pushNamed(context, PhoneNumberScreen.routeName),
       );
 }

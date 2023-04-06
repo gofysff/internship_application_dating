@@ -31,7 +31,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   Widget get bodyOfTheScreen {
     return Column(
       children: [
-        mainBodyPart,
+        indicatorProgressBar,
         mainBodyPart,
       ],
     );

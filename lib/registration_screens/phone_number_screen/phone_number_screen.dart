@@ -31,34 +31,86 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
     return Scaffold(
       backgroundColor: StylingBasicColors.scaffoldBackgroundColor,
-      body: Padding(
+      body: bodyOfTheScreen,
+    );
+  }
+
+  Widget get bodyOfTheScreen => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 75,
-                  ),
-                  label,
-                  const SizedBox(height: 62),
-                  Column(
-                    children: [
-                      keyboardWithButtonToNextScreen,
-                      const SizedBox(height: 16),
-                      privacyPolicy
-                    ],
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 75,
+            ),
+            label,
+            const SizedBox(height: 62),
+            Column(
+              children: [
+                keyboardWithButtonToNextScreen,
+                const SizedBox(height: 16),
+                privacyPolicy
+              ],
             ),
           ],
         ),
-      ),
-    );
-  }
+      );
+
+  // next will be splitted into small parts describing of keyboard
+  Widget get keyboardWithButtonToNextScreen => Observer(
+        builder: (_) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              PhoneNumberScreenRes.textAboveButtonToKeyboard,
+              style: StylingTypicalTextStyles.descriptionTextStyle,
+            ),
+            completeWrappedKeyboard,
+            const SizedBox(height: 16),
+            buttonToNextScreen,
+          ],
+        ),
+      );
+
+  Widget get completeWrappedKeyboard => Container(
+        decoration: BoxDecoration(
+          color: StylingOtherColors.textFieldBackgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          border:
+              Border.all(color: StylingOtherColors.borderAroundTextFieldColor),
+        ),
+        child: completeKeyboardWithoutWraping,
+      );
+
+  Widget get completeKeyboardWithoutWraping => Row(
+        children: [
+          const SizedBox(width: 12),
+          Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
+          const SizedBox(width: 8),
+          Text(
+            '+${_registrationStore.countryNumber}',
+            style: StylingTypicalTextStyles.descriptionTextStyle,
+          ),
+          const SizedBox(width: 30),
+          keyboardField,
+        ],
+      );
+
+  // part of keyboard only where we can input number
+  Widget get keyboardField => SizedBox(
+        width: widthOfScreen - 106 - 16 * 2,
+        // width limitation because of Row
+        child: TextField(
+          cursorColor: StylingOtherColors.coursorTextKeyboardColor,
+          onChanged: (String inputString) {
+            _registrationStore.phoneNumber = inputString;
+          },
+          decoration: const InputDecoration(focusColor: Colors.black
+              //? why focusColor not working?
+              ),
+          keyboardType: TextInputType.phone,
+          // cursorColor: , // TODO check this option for styling
+        ),
+      );
 
 //smallest parts of the screen
   Text get label => Text(
@@ -91,54 +143,5 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         onPressed: () {
           Navigator.pushNamed(context, OtpCodeScreen.routename);
         },
-      );
-
-  Widget get keyboardWithButtonToNextScreen => Observer(
-        builder: (_) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              PhoneNumberScreenRes.textAboveButtonToKeyboard,
-              style: StylingTypicalTextStyles.descriptionTextStyle,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: StylingOtherColors.textFieldBackgroundColor,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                    color: StylingOtherColors.borderAroundTextFieldColor),
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 12),
-                  Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
-                  const SizedBox(width: 8),
-                  Text(
-                    '+${_registrationStore.countryNumber}',
-                    style: StylingTypicalTextStyles.descriptionTextStyle,
-                  ),
-                  const SizedBox(width: 30),
-                  SizedBox(
-                    width: widthOfScreen - 106 - 16 * 2,
-                    // width limitation because of Row
-                    child: TextField(
-                      cursorColor: StylingOtherColors.coursorTextKeyboardColor,
-                      onChanged: (String inputString) {
-                        _registrationStore.phoneNumber = inputString;
-                      },
-                      decoration: const InputDecoration(focusColor: Colors.black
-                          //? why focusColor not working?
-                          ),
-                      keyboardType: TextInputType.phone,
-                      // cursorColor: , // TODO check this option for styling
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            buttonToNextScreen,
-          ],
-        ),
       );
 }
