@@ -43,3 +43,6 @@ abstract class RegistrationStoreBase with Store {
   @observable
   bool showGenderOnProfile = true;
 }
+
+
+// TODO: try to figure out what is Atom in mobx and how it works
