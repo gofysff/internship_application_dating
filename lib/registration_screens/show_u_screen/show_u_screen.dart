@@ -21,66 +21,74 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: generalAppBarRegistration,
+      body: bodyOfTheScreen,
+    );
+  }
+
+  Widget get bodyOfTheScreen => Column(
+        children: [
+          mainBodyPart,
+          lowerBodyPart,
+        ],
+      );
+
+  Expanded get mainBodyPart => Expanded(
+        flex: 2,
+        child: Column(
+          children: [
+            indicatorProgressBar,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 32),
+                  label,
+                  const SizedBox(height: 32),
+                  genderList
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+
+  Expanded get lowerBodyPart => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: buttonToNextScreen,
+          ),
+        ),
+      );
+
+  // smallest parts of the screen
+
+  IndicatorProgressBar get indicatorProgressBar => const IndicatorProgressBar(
+        currentStep: ShowYouScreenRes.currentProgress,
+        totalSteps: ShowYouScreenRes.maxProgress,
+      );
+
   Text label = Text(
     ShowYouScreenRes.labelText,
     style: StylingTypicalTextStyles.labelTextStyle,
   );
 
-  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-    text: ShowYouScreenRes.mainSwitchButtonText,
-    onPressed: () {
-      //  Todo: add navigation to the next screen
-      _registrationStore.showYou = genderList.getSelectedButtonValue;
-      print(_registrationStore.toString());
-    },
-  );
+  ListWithOneSelectedButton get genderList => ListWithOneSelectedButton(
+        buttonsTextValues: ShowYouScreenRes.buttonValues,
+      );
 
-  IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
-    currentStep: ShowYouScreenRes.currentProgress,
-    totalSteps: ShowYouScreenRes.maxProgress,
-  );
-
-  ListWithOneSelectedButton genderList = const ListWithOneSelectedButton(
-    buttonsTextValues: ShowYouScreenRes.buttonValues,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: generalAppBarRegistration,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                indicatorProgressBar,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 32),
-                      label,
-                      const SizedBox(height: 32),
-                      genderList
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: buttonToNextScreen,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+        text: ShowYouScreenRes.mainSwitchButtonText,
+        onPressed: () {
+          //  Todo: add navigation to the next screen
+          _registrationStore.showYou = genderList.getSelectedButtonValue;
+          print(_registrationStore.toString());
+        },
+      );
 }

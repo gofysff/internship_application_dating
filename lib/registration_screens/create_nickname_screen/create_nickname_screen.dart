@@ -22,91 +22,106 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(CreateNicknameScreenRes.labelText,
-      style: StylingTypicalTextStyles.labelTextStyle);
-
-  Text beneathInputField1 = Text(CreateNicknameScreenRes.textBeneathInputField1,
-      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
-  Text beneathInputField2 = Text(CreateNicknameScreenRes.textBeneathInputField2,
-      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
-
-  Text askToShowRealName = Text(CreateNicknameScreenRes.askToShowRealName,
-      style: StylingTypicalTextStyles.descriptionTextStyle);
-
-  AskUserButton askUserButton =
-      const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
-
-  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-    text: CreateNicknameScreenRes.mainSwitchButtonText,
-    onPressed: () {
-      Navigator.pushNamed(context, GenderSelectScreen.routeName);
-      _registrationStore.showEveryoneRealName = askUserButton.isPressed;
-    },
-  );
-
-  late TextField keyboard = TextField(
-    onChanged: (value) {
-      _registrationStore.nickname = value;
-    },
-    keyboardType: TextInputType.text,
-    decoration: const InputDecoration(
-      // TODO: change keyboard color
-      // fillColor: Color(0xFFE5E5E5), //? why this is not working
-      border: OutlineInputBorder(),
-      hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
-    ),
-  );
-
-  IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
-    currentStep: CreateNicknameScreenRes.currentProgress,
-    totalSteps: CreateNicknameScreenRes.maxProgress,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generalAppBarRegistration,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                indicatorProgressBar,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 32),
-                      label,
-                      const SizedBox(height: 32),
-                      keyboard,
-                      const SizedBox(height: 16),
-                      beneathInputField1,
-                      const SizedBox(height: 16),
-                      beneathInputField2,
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  askUserButton,
-                  const SizedBox(height: 20),
-                  buttonToNextScreen,
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: bodyOfTheScreen,
     );
   }
+
+  Widget get bodyOfTheScreen {
+    return Column(
+      children: [
+        mainBodyPart,
+        lowerBodyPartWithButtons,
+      ],
+    );
+  }
+
+  Expanded get mainBodyPart => Expanded(
+        flex: 2,
+        child: Column(
+          children: [
+            indicatorProgressBar,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 32),
+                  label,
+                  const SizedBox(height: 32),
+                  keyboard,
+                  const SizedBox(height: 16),
+                  beneathInputField1,
+                  const SizedBox(height: 16),
+                  beneathInputField2,
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+
+  Expanded get lowerBodyPartWithButtons => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              askUserButtonToShowName,
+              const SizedBox(height: 20),
+              buttonToNextScreen,
+            ],
+          ),
+        ),
+      );
+
+  // smallest parts of the screen
+
+  IndicatorProgressBar get indicatorProgressBar => const IndicatorProgressBar(
+        currentStep: CreateNicknameScreenRes.currentProgress,
+        totalSteps: CreateNicknameScreenRes.maxProgress,
+      );
+
+  Text get label => Text(
+        CreateNicknameScreenRes.labelText,
+        style: StylingTypicalTextStyles.labelTextStyle,
+      );
+
+  TextField get keyboard => TextField(
+        onChanged: (value) {
+          _registrationStore.nickname = value;
+        },
+        keyboardType: TextInputType.text,
+        decoration: const InputDecoration(
+          // TODO: change keyboard color
+          // fillColor: Color(0xFFE5E5E5), //? why this is not working
+          border: OutlineInputBorder(),
+          hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
+        ),
+      );
+
+  Text get beneathInputField1 => Text(
+        CreateNicknameScreenRes.textBeneathInputField1,
+        style: StylingTypicalTextStyles.descriptionTextStyleFaded,
+      );
+
+  Text get beneathInputField2 => Text(
+        CreateNicknameScreenRes.textBeneathInputField2,
+        style: StylingTypicalTextStyles.descriptionTextStyleFaded,
+      );
+
+  AskUserButton get askUserButtonToShowName =>
+      const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
+
+  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+        text: CreateNicknameScreenRes.mainSwitchButtonText,
+        onPressed: () {
+          Navigator.pushNamed(context, GenderSelectScreen.routeName);
+          _registrationStore.showEveryoneRealName =
+              askUserButtonToShowName.isPressed;
+        },
+      );
 }

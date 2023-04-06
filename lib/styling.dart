@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class StylingFiguresColors {
   static const plugButtonBackground = Color(0xffF2F2F2);
-  static const Color kbackgroundColor = Color(0xffCECECE);
+  static const Color backgroundColor = Color(0xffCECECE);
   static const Color elipsesColor = Color(0xffD9D9D9);
 
   static const Color switchScreenButtonColor = Color(0xff909090);
@@ -26,6 +26,12 @@ class StylingFontsColors {
 
 class StylingOtherColors {
   static const Color coursorTextKeyboardColor = Colors.black;
+  static const Color borderAroundTextFieldColor = Colors.grey;
+  static const Color textFieldBackgroundColor = Color(0xffF1F0F0);
+}
+
+class StylingBasicColors {
+  static const scaffoldBackgroundColor = Colors.white;
 }
 
 class StylingFontSizes {

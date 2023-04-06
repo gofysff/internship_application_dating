@@ -20,59 +20,73 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(BirthdayScreenRes.labelText,
-      style: StylingTypicalTextStyles.labelTextStyle);
-
-  Text beneathInputField = Text(BirthdayScreenRes.textBeneathInputField,
-      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
-
-  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-      text: BirthdayScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        Navigator.pushNamed(context, CreateNicknameScreen.routename);
-      });
-
-  late Observer keyboard = Observer(
-    builder: (_) => TextField(
-      onChanged: (value) => _registrationStore.birthday = value,
-      keyboardType: TextInputType.datetime,
-      decoration: const InputDecoration(
-          // Todo: change keyboard color
-          // fillColor: Color(0xFFE5E5E5), //? why this is not working
-          border: OutlineInputBorder(),
-          hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
-          hintText: BirthdayScreenRes.textInInputField),
-      // TODO: add  slashes to this field after the user enters the first two numbers (DD) and the first two numbers (MM)
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generalAppBarRegistration,
-      body: Column(
-        children: [
-          const IndicatorProgressBar(
-              currentStep: BirthdayScreenRes.currentProgress,
-              totalSteps: BirthdayScreenRes.maxProgress),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 32),
-                label,
-                const SizedBox(height: 32),
-                keyboard,
-                const SizedBox(height: 16),
-                beneathInputField,
-                const SizedBox(height: 20),
-                buttonToNextScreen,
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: bodyOfTheScreen,
     );
   }
+
+  Widget get bodyOfTheScreen {
+    return Column(
+      children: [
+        mainBodyPart,
+        mainBodyPart,
+      ],
+    );
+  }
+
+  Widget get mainBodyPart => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 32),
+            label,
+            const SizedBox(height: 32),
+            keyboard,
+            const SizedBox(height: 16),
+            beneathInputField,
+            const SizedBox(height: 20),
+            buttonToNextScreen,
+          ],
+        ),
+      );
+
+  // smallest parts of the Screen
+
+  IndicatorProgressBar get indicatorProgressBar => const IndicatorProgressBar(
+        currentStep: BirthdayScreenRes.currentProgress,
+        totalSteps: BirthdayScreenRes.maxProgress,
+      );
+
+  Text get label => Text(
+        BirthdayScreenRes.labelText,
+        style: StylingTypicalTextStyles.labelTextStyle,
+      );
+
+  Observer get keyboard => Observer(
+        builder: (_) => TextField(
+          onChanged: (value) => _registrationStore.birthday = value,
+          keyboardType: TextInputType.datetime,
+          decoration: const InputDecoration(
+            // Todo: change keyboard color
+            // fillColor: Color(0xFFE5E5E5), //? why this is not working
+            border: OutlineInputBorder(),
+            hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
+            hintText: BirthdayScreenRes.textInInputField,
+          ),
+          // TODO: add  slashes to this field after the user enters the first two numbers (DD) and the first two numbers (MM)
+        ),
+      );
+
+  Text get beneathInputField => Text(BirthdayScreenRes.textBeneathInputField,
+      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
+
+  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+      text: BirthdayScreenRes.mainSwitchButtonText,
+      onPressed: () {
+        Navigator.pushNamed(context, CreateNicknameScreen.routename);
+      });
 }

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:internship_app/general_ui_widgets/list_with_one_selected_button/store/list_with_one_selected_button_store.dart';
 
 import 'clickable_from_list.dart';
-import 'list_with_one_selected_button_storage/list_with_one_selected_button_store.dart';
-
-final ListWithOneSelectedButtonStore _listWithOneSelectedButtonStore =
-    ListWithOneSelectedButtonStore();
 
 class ListWithOneSelectedButton extends StatefulWidget {
-  const ListWithOneSelectedButton({
+  ListWithOneSelectedButton({
     Key? key,
     this.indexSelected = 0,
     required this.buttonsTextValues,
@@ -16,6 +13,9 @@ class ListWithOneSelectedButton extends StatefulWidget {
 
   final int indexSelected;
   final List<String> buttonsTextValues;
+  final ListWithOneSelectedButtonStore _listWithOneSelectedButtonStore =
+      ListWithOneSelectedButtonStore();
+
   @override
   State<ListWithOneSelectedButton> createState() =>
       _ListWithOneSelectedButtonState();
@@ -38,10 +38,12 @@ class _ListWithOneSelectedButtonState extends State<ListWithOneSelectedButton> {
         // if it's only one element in list, it will be added in any case and we will not add unnecessary SizedBox
         buttonsWithSpaces.add(
           ClikableButtonFromList(
-            isFaded: _listWithOneSelectedButtonStore.selectedButtonIndex != 0,
+            isFaded:
+                widget._listWithOneSelectedButtonStore.selectedButtonIndex != 0,
             text: widget.buttonsTextValues[0],
             onPressed: () {
-              _listWithOneSelectedButtonStore.changeSelectedButtonIndex(0);
+              widget._listWithOneSelectedButtonStore
+                  .changeSelectedButtonIndex(0);
               setState(() {});
             },
           ),
@@ -56,10 +58,12 @@ class _ListWithOneSelectedButtonState extends State<ListWithOneSelectedButton> {
           );
           buttonsWithSpaces.add(
             ClikableButtonFromList(
-              isFaded: i != _listWithOneSelectedButtonStore.selectedButtonIndex,
+              isFaded: i !=
+                  widget._listWithOneSelectedButtonStore.selectedButtonIndex,
               text: widget.buttonsTextValues[i],
               onPressed: () {
-                _listWithOneSelectedButtonStore.changeSelectedButtonIndex(i);
+                widget._listWithOneSelectedButtonStore
+                    .changeSelectedButtonIndex(i);
                 setState(() {});
               },
             ),

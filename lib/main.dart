@@ -39,3 +39,4 @@ class MainApp extends StatelessWidget {
 
 // TODO: try to figure out how customize correctly the keyboard 
 
+// TODO: try to figure out why in show_u screen and gender_select_screen genderList doesn't give us the correct value from the store(method is getSelectedButtonValue)

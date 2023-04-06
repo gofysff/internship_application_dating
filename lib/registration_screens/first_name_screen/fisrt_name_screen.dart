@@ -23,55 +23,65 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text lable = Text(FirstNameScreenRes.labelText,
-      style: StylingTypicalTextStyles.labelTextStyle);
-
-  Text beneathInputField = Text(FirstNameScreenRes.textBeneathInputField,
-      style: StylingTypicalTextStyles.fadedSlightTextStyle);
-
-  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-      text: FirstNameScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        Navigator.pushNamed(context, BirthdayScreen.routeName);
-      });
-
-  late Observer keyboard = Observer(
-    builder: (_) => TextField(
-      cursorColor: StylingOtherColors.coursorTextKeyboardColor,
-      onChanged: (value) => _registrationStore.firstName = value,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-      ),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generalAppBarRegistration,
-      body: Column(
-        children: [
-          const IndicatorProgressBar(
-              currentStep: FirstNameScreenRes.currentProgress,
-              totalSteps: FirstNameScreenRes.maxProgress),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 32),
-                lable,
-                const SizedBox(height: 32),
-                keyboard,
-                const SizedBox(height: 16),
-                beneathInputField,
-                const SizedBox(height: 20),
-                buttonToNextScreen,
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: bodyOfTheWidget,
     );
   }
+
+  Widget get bodyOfTheWidget => Column(
+        children: [
+          indicatorProgressBar,
+          mainBodyPart,
+        ],
+      );
+
+  Widget get mainBodyPart => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 32),
+            lable,
+            const SizedBox(height: 32),
+            keyboard,
+            const SizedBox(height: 16),
+            beneathInputField,
+            const SizedBox(height: 20),
+            buttonToNextScreen,
+          ],
+        ),
+      );
+
+  IndicatorProgressBar get indicatorProgressBar => const IndicatorProgressBar(
+        currentStep: FirstNameScreenRes.currentProgress,
+        totalSteps: FirstNameScreenRes.maxProgress,
+      );
+
+  //smallest pieces of the screen
+
+  Text lable = Text(FirstNameScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
+
+  Observer get keyboard => Observer(
+        builder: (_) => TextField(
+          cursorColor: StylingOtherColors.coursorTextKeyboardColor,
+          onChanged: (value) => _registrationStore.firstName = value,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            // TODO: work with colors
+          ),
+        ),
+      );
+
+  Text beneathInputField = Text(FirstNameScreenRes.textBeneathInputField,
+      style: StylingTypicalTextStyles.fadedSlightTextStyle);
+
+  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+      text: FirstNameScreenRes.mainSwitchButtonText,
+      onPressed: () {
+        Navigator.pushNamed(context, BirthdayScreen.routeName);
+      });
 }

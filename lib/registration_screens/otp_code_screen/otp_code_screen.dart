@@ -5,6 +5,7 @@ import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../registration_store/registration_store.dart';
 import '../../styling.dart';
 import '../../utils/otp_custom_keyboard.dart';
+import '../../utils/timer_get_sms_again_widget.dart';
 import 'res.dart';
 
 final RegistrationStore _registrationStore =
@@ -19,52 +20,42 @@ class OtpCodeScreen extends StatefulWidget {
 }
 
 class _OtpCodeScreenState extends State<OtpCodeScreen> {
-  late Observer descriptionTitle = Observer(
-    builder: (_) => Text(
-      _registrationStore.fullPhoneNumber,
-      style: StylingTypicalTextStyles.descriptionTextStyleBigger,
-    ),
-  );
-
-  //TODO: change countrynomber to observalbe
-
-  Text lable = Text(OtpCodeScreenRes.labelText,
-      style: StylingTypicalTextStyles.labelTextStyle);
-
-  //TODO: specify the time when the user can get the sms again
-  // Timer should use it when we send the sms
-  //? I guess it's not the best way to do it
-  // ? maybe it will be better to use Timer class
-  // or maybe it will be better to use FutureBuilder
-  int seconds = 60;
-  late Text getSmsAgainText = Text(
-    OtpCodeScreenRes.getSmsAgain1 +
-        seconds.toString() +
-        OtpCodeScreenRes.getSmsAgain2,
-    style: StylingTypicalTextStyles.descriptionTextStyle
-        .copyWith(color: StylingFontsColors.fadedColor),
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generalAppBarRegistration,
-      body: Padding(
+      body: bodyOfTheWidget,
+    );
+  }
+
+  Widget get bodyOfTheWidget => Padding(
         padding: const EdgeInsets.only(left: 16, right: 48, top: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             lable,
             const SizedBox(height: 10),
-            descriptionTitle,
+            descriptionOfLabel,
             const SizedBox(height: 40),
             const OtpCustomKeyboard(),
             const SizedBox(height: 16),
-            getSmsAgainText
+            timerGetSmsAgainWithText
             // pinput input field
           ],
         ),
-      ),
-    );
-  }
+      );
+
+  // smallest parts of the screen
+  Text get lable => Text(OtpCodeScreenRes.labelText,
+      style: StylingTypicalTextStyles.labelTextStyle);
+
+  Observer get descriptionOfLabel => Observer(
+        builder: (_) => Text(
+          'Sms sent to +${_registrationStore.fullPhoneNumber}',
+          style: StylingTypicalTextStyles.descriptionTextStyleBigger,
+        ),
+      );
+
+  TimerGetSmsAgainWidget get timerGetSmsAgainWithText =>
+      const TimerGetSmsAgainWidget();
 }

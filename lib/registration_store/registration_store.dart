@@ -14,7 +14,7 @@ abstract class RegistrationStoreBase with Store {
   String phoneNumber = "";
 
   @observable
-  String countryNumber = "+7";
+  String countryNumber = "7";
 
   @computed
   String get fullPhoneNumber => countryNumber + phoneNumber;

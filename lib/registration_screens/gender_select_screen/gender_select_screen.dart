@@ -24,71 +24,47 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  Text label = Text(GenderSelectScreenRes.labelText,
-      style: StylingTypicalTextStyles.labelTextStyle);
-
-  Text beneathLabel = Text(GenderSelectScreenRes.textBeneathLabel,
-      style: StylingTypicalTextStyles.descriptionTextStyleFaded);
-
-  late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-    text: GenderSelectScreenRes.mainSwitchButtonText,
-    onPressed: () {
-      Navigator.pushNamed(context, ShowYouScreen.routeName);
-      _registrationStore.gender = genderList.getSelectedButtonValue;
-      _registrationStore.showGenderOnProfile = askUserButton.isPressed;
-    },
-  );
-
-  ListWithOneSelectedButton genderList = const ListWithOneSelectedButton(
-    buttonsTextValues: GenderSelectScreenRes.buttonValues,
-
-    // isFaded: false,
-  );
-
-  AskUserButton askUserButton =
-      const AskUserButton(text: GenderSelectScreenRes.askToShowGender);
-
-  IndicatorProgressBar indicatorProgressBar = const IndicatorProgressBar(
-      currentStep: GenderSelectScreenRes.currentProgress,
-      totalSteps: GenderSelectScreenRes.maxProgress);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: generalAppBarRegistration,
-      body: getBody(),
+      body: bodyOfTheWidget,
     );
   }
 
-  Widget getBody() {
+  Widget get bodyOfTheWidget {
     return Column(
       children: [
-        Expanded(
-          flex: 2,
-          child: Column(
-            children: [
-              indicatorProgressBar,
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 32),
-                        label,
-                        const SizedBox(height: 19),
-                        beneathLabel,
-                        const SizedBox(height: 32),
-                        genderList
-                      ]))
-            ],
-          ),
-        ),
-        getSomething(),
+        upperBodyPart,
+        lowerBodyPartWithButtons,
       ],
     );
   }
 
-  Widget getSomething() {
+  Expanded get upperBodyPart => Expanded(
+        flex: 2,
+        child: Column(
+          children: [
+            indicatorProgressBar,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 32),
+                  label,
+                  const SizedBox(height: 19),
+                  beneathLabel,
+                  const SizedBox(height: 32),
+                  genderList
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+
+  Expanded get lowerBodyPartWithButtons {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -103,4 +79,36 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
       ),
     );
   }
+
+  //smallest pieces of the screen
+
+  IndicatorProgressBar get indicatorProgressBar => const IndicatorProgressBar(
+        currentStep: GenderSelectScreenRes.currentProgress,
+        totalSteps: GenderSelectScreenRes.maxProgress,
+      );
+
+  Text get label => Text(
+        GenderSelectScreenRes.labelText,
+        style: StylingTypicalTextStyles.labelTextStyle,
+      );
+
+  Text get beneathLabel => Text(
+        GenderSelectScreenRes.textBeneathLabel,
+        style: StylingTypicalTextStyles.descriptionTextStyleFaded,
+      );
+
+  ListWithOneSelectedButton get genderList => ListWithOneSelectedButton(
+      buttonsTextValues: GenderSelectScreenRes.buttonValues);
+
+  AskUserButton get askUserButton =>
+      const AskUserButton(text: GenderSelectScreenRes.askToShowGender);
+
+  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+        text: GenderSelectScreenRes.mainSwitchButtonText,
+        onPressed: () {
+          Navigator.pushNamed(context, ShowYouScreen.routeName);
+          _registrationStore.gender = genderList.getSelectedButtonValue;
+          _registrationStore.showGenderOnProfile = askUserButton.isPressed;
+        },
+      );
 }
