@@ -34,10 +34,10 @@ class MainApp extends StatelessWidget {
   }
 }
 
-// TODO: 1: try to figure out why in show_u screen and gender_select_screen genderList doesn't give us the correct value from the store(method is getSelectedButtonValue)
 
-// TODO: 2 try to figure out how customize correctly the keyboard 
-// TODO: 3 specify information about otp timer work
 
-// TODO: 4: work with RegistrationStore (pre-processing data from the keyboards)
+// TODO: 1 try to figure out how customize correctly the keyboard 
+// TODO: 2 specify information about otp timer work
+
+// TODO: 3: work with RegistrationStore (pre-processing data from the keyboards)
 

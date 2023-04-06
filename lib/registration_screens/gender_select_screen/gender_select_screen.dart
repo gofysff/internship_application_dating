@@ -24,6 +24,10 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
+  // saved genderList in variable to get access to it state
+  ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
+      buttonsTextValues: GenderSelectScreenRes.buttonValues);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,9 +100,6 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
         GenderSelectScreenRes.textBeneathLabel,
         style: StylingTypicalTextStyles.descriptionTextStyleFaded,
       );
-
-  ListWithOneSelectedButton get genderList => ListWithOneSelectedButton(
-      buttonsTextValues: GenderSelectScreenRes.buttonValues);
 
   AskUserButton get askUserButton =>
       const AskUserButton(text: GenderSelectScreenRes.askToShowGender);

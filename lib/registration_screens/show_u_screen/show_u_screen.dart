@@ -21,6 +21,10 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
+  ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
+    buttonsTextValues: ShowYouScreenRes.buttonValues,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,10 +82,6 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
     ShowYouScreenRes.labelText,
     style: StylingTypicalTextStyles.labelTextStyle,
   );
-
-  ListWithOneSelectedButton get genderList => ListWithOneSelectedButton(
-        buttonsTextValues: ShowYouScreenRes.buttonValues,
-      );
 
   SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
         text: ShowYouScreenRes.mainSwitchButtonText,
