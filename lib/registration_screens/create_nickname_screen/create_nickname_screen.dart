@@ -22,7 +22,7 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  // save buttons in variables to get access to it state
+  // save buttons in variables to get access of it state
   AskUserButton askUserButtonToShowName =
       const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
 
