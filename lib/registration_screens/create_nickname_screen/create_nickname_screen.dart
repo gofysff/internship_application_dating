@@ -22,6 +22,10 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
+  // save buttons in variables to get access to it state
+  AskUserButton askUserButtonToShowName =
+      const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,9 +116,6 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
         CreateNicknameScreenRes.textBeneathInputField2,
         style: StylingTypicalTextStyles.descriptionTextStyleFaded,
       );
-
-  AskUserButton get askUserButtonToShowName =>
-      const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
 
   SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
         text: CreateNicknameScreenRes.mainSwitchButtonText,

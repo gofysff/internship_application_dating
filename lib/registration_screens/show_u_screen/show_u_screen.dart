@@ -21,6 +21,8 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
+  // save buttons in variables to get access to it state
+
   ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
     buttonsTextValues: ShowYouScreenRes.buttonValues,
   );
