@@ -9,17 +9,26 @@ import 'package:internship_app/styling.dart';
 import '../general_ui_widgets/main_switch_screen_button.dart';
 import '../registration_screens/phone_number_screen/res.dart';
 
-class PhoneNumberKeyboardWidget extends StatelessWidget {
+class PhoneNumberKeyboardWidget extends StatefulWidget {
   final double widthOfScreen;
   final SwitchScreenButton buttonToNextScreen;
-  final _phoneTextController = TextEditingController();
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
-  PhoneNumberKeyboardWidget({
+
+  const PhoneNumberKeyboardWidget({
     Key? key,
     required this.widthOfScreen,
     required this.buttonToNextScreen,
   }) : super(key: key);
+
+  @override
+  State<PhoneNumberKeyboardWidget> createState() =>
+      _PhoneNumberKeyboardWidgetState();
+}
+
+class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
+  final _phoneTextController = TextEditingController();
+
+  final RegistrationStore _registrationStore =
+      RegistrationStoreSingletone.instanceOfStore;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +36,6 @@ class PhoneNumberKeyboardWidget extends StatelessWidget {
   }
 
   // next will be splitted into small parts describing of keyboard
-
   Widget get keyboardWithButtonToNextScreen => Observer(
         builder: (_) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +46,7 @@ class PhoneNumberKeyboardWidget extends StatelessWidget {
             ),
             completeWrappedKeyboard,
             const SizedBox(height: 16),
-            buttonToNextScreen,
+            widget.buttonToNextScreen,
           ],
         ),
       );
@@ -69,7 +77,7 @@ class PhoneNumberKeyboardWidget extends StatelessWidget {
 
   // part of keyboard only where we can input number
   Widget get keyboardField => SizedBox(
-        width: widthOfScreen - 106 - 16 * 2,
+        width: widget.widthOfScreen - 106 - 16 * 2,
         // width limitation because of Row
         child: MaskedTextField(
           mask: PhoneNumberScreenRes.maskTextField,
