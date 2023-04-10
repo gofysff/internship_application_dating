@@ -1,9 +1,8 @@
-import 'package:flag/flag.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:internship_app/registration_screens/otp_code_screen/otp_code_screen.dart';
-import 'package:internship_app/registration_store/registration_store.dart';
-import 'package:masked_text_field/masked_text_field.dart';
+
+import 'package:internship_app/utils/phone_number_keyboard.dart';
+import 'package:internship_app/utils/privacy_policy.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
 import '../../styling.dart';
@@ -19,10 +18,6 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
-  final _phoneTextController = TextEditingController();
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
-
   late double widthOfScreen;
   late double heightOfScreen;
 
@@ -48,75 +43,15 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             const SizedBox(height: 62),
             Column(
               children: [
-                keyboardWithButtonToNextScreen,
+                PhoneNumberKeyboardWidget(
+                  widthOfScreen: widthOfScreen,
+                  buttonToNextScreen: buttonToNextScreen,
+                ),
                 const SizedBox(height: 16),
-                privacyPolicy
+                const PrivacyPolicyWidget(),
               ],
             ),
           ],
-        ),
-      );
-
-  // next will be splitted into small parts describing of keyboard
-  Widget get keyboardWithButtonToNextScreen => Observer(
-        builder: (_) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              PhoneNumberScreenRes.textAboveButtonToKeyboard,
-              style: StylingTypicalTextStyles.descriptionTextStyle,
-            ),
-            completeWrappedKeyboard,
-            const SizedBox(height: 16),
-            buttonToNextScreen,
-          ],
-        ),
-      );
-
-  Widget get completeWrappedKeyboard => Container(
-        decoration: BoxDecoration(
-          color: StylingOtherColors.textFieldBackgroundColor,
-          borderRadius: BorderRadius.circular(16),
-          border:
-              Border.all(color: StylingOtherColors.borderAroundTextFieldColor),
-        ),
-        child: completeKeyboardWithoutWraping,
-      );
-
-  Widget get completeKeyboardWithoutWraping => Row(
-        children: [
-          const SizedBox(width: 12),
-          Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
-          const SizedBox(width: 8),
-          Text(
-            '+${_registrationStore.countryNumber}',
-            style: StylingTypicalTextStyles.descriptionTextStyle,
-          ),
-          const SizedBox(width: 30),
-          keyboardField,
-        ],
-      );
-
-  // part of keyboard only where we can input number
-  Widget get keyboardField => SizedBox(
-        width: widthOfScreen - 106 - 16 * 2,
-        // width limitation because of Row
-        child: MaskedTextField(
-          mask: PhoneNumberScreenRes.maskTextField,
-          textFieldController: _phoneTextController,
-          maxLength: PhoneNumberScreenRes.maxPhoneNumberLength,
-
-          // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
-          onChange: (String inputString) {
-            _registrationStore.phoneNumber = inputString;
-          },
-
-          inputDecoration:
-              const InputDecoration(focusColor: Colors.black, counterText: ""
-                  //? why focusColor not working?
-                  ),
-          keyboardType: TextInputType.phone,
-          // cursorColor: , // TODO check this option for styling
         ),
       );
 
@@ -124,26 +59,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   Text get label => Text(
         PhoneNumberScreenRes.labelText,
         style: StylingTypicalTextStyles.labelTextStyle,
-      );
-
-  RichText get privacyPolicy => RichText(
-        text: TextSpan(
-          text: PhoneNumberScreenRes.aboutPrivacyPolicy,
-          style: StylingTypicalTextStyles.fadedSlightTextStyle,
-          children: [
-            TextSpan(
-              text: PhoneNumberScreenRes.textWithLinkToPrivacyPolicy,
-              style: StylingTypicalTextStyles.fadedSlightTextStyle
-                  .copyWith(color: Colors.black),
-            ),
-            const TextSpan(text: PhoneNumberScreenRes.andText),
-            TextSpan(
-              text: PhoneNumberScreenRes.textWithLinkToUserAgreement,
-              style: StylingTypicalTextStyles.fadedSlightTextStyle
-                  .copyWith(color: Colors.black),
-            ),
-          ],
-        ),
       );
 
   SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
