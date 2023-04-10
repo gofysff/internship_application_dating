@@ -17,7 +17,7 @@ abstract class RegistrationStoreBase with Store {
   String countryNumber = "7";
 
   @computed
-  String get fullPhoneNumber => countryNumber + phoneNumber;
+  String get fullPhoneNumber => '+$countryNumber-$phoneNumber';
 
   @observable
   String? otpCode;

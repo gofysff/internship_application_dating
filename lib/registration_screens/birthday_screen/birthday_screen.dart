@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/create_nickname_screen/create_nickname_screen.dart';
+import 'package:masked_text_field/masked_text_field.dart';
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../general_ui_widgets/main_switch_screen_button.dart';
 import '../../general_ui_widgets/progress_bar_indicator.dart';
@@ -17,6 +18,7 @@ class BirthdayScreen extends StatefulWidget {
 }
 
 class _BirthdayScreenState extends State<BirthdayScreen> {
+  final TextEditingController _dateController = TextEditingController();
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
@@ -67,17 +69,18 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       );
 
   Observer get keyboard => Observer(
-        builder: (_) => TextField(
-          onChanged: (value) => _registrationStore.birthday = value,
-          keyboardType: TextInputType.datetime,
-          decoration: const InputDecoration(
-            // Todo: change keyboard color
-            // fillColor: Color(0xFFE5E5E5), //? why this is not working
+        builder: (_) => MaskedTextField(
+          textFieldController: _dateController,
+          inputDecoration: const InputDecoration(
+            counterText: "",
             border: OutlineInputBorder(),
             hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
-            hintText: BirthdayScreenRes.textInInputField,
+            hintText: BirthdayScreenRes.hintInTextField,
           ),
-          // TODO: add  slashes to this field after the user enters the first two numbers (DD) and the first two numbers (MM)
+          maxLength: 10,
+          mask: BirthdayScreenRes.maskInputField,
+          onChange: (value) => _registrationStore.birthday = value,
+          keyboardType: TextInputType.datetime,
         ),
       );
 

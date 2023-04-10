@@ -4,7 +4,8 @@ class BirthdayScreenRes {
   static const String textBeneathInputField =
       "Your age will be visible to everyone";
 
-  static const String textInInputField = "DD/MM/YYYY";
+  static const String hintInTextField = "DD/MM/YYYY";
+  static const String maskInputField = 'xx/xx/xxxx';
 
   static const int currentProgress = 2;
   static const int maxProgress = 7; // max progress bar value

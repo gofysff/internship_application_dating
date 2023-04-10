@@ -51,7 +51,7 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
 
   Observer get descriptionOfLabel => Observer(
         builder: (_) => Text(
-          'Sms sent to +${_registrationStore.fullPhoneNumber}',
+          'Sms sent to ${_registrationStore.fullPhoneNumber}',
           style: StylingTypicalTextStyles.descriptionTextStyleBigger,
         ),
       );

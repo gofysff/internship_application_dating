@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:internship_app/registration_screens/otp_code_screen/otp_code_screen.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
+import 'package:masked_text_field/masked_text_field.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
 import '../../styling.dart';
@@ -18,6 +19,7 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+  final _phoneTextController = TextEditingController();
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
@@ -99,14 +101,20 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   Widget get keyboardField => SizedBox(
         width: widthOfScreen - 106 - 16 * 2,
         // width limitation because of Row
-        child: TextField(
-          cursorColor: StylingOtherColors.coursorTextKeyboardColor,
-          onChanged: (String inputString) {
+        child: MaskedTextField(
+          mask: PhoneNumberScreenRes.maskTextField,
+          textFieldController: _phoneTextController,
+          maxLength: PhoneNumberScreenRes.maxPhoneNumberLength,
+
+          // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
+          onChange: (String inputString) {
             _registrationStore.phoneNumber = inputString;
           },
-          decoration: const InputDecoration(focusColor: Colors.black
-              //? why focusColor not working?
-              ),
+
+          inputDecoration:
+              const InputDecoration(focusColor: Colors.black, counterText: ""
+                  //? why focusColor not working?
+                  ),
           keyboardType: TextInputType.phone,
           // cursorColor: , // TODO check this option for styling
         ),

@@ -10,4 +10,7 @@ class PhoneNumberScreenRes {
   static const String textWithLinkToPrivacyPolicy = "privacy policy";
   static const String andText = " and ";
   static const String textWithLinkToUserAgreement = "user agreement";
+
+  static const String maskTextField = 'xxx-xxx-xx-xx';
+  static const int maxPhoneNumberLength = 13;
 }
