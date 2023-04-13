@@ -81,19 +81,19 @@ mixin _$RegistrationStore on RegistrationStoreBase, Store {
     });
   }
 
-  late final _$birthdayAtom =
-      Atom(name: 'RegistrationStoreBase.birthday', context: context);
+  late final _$birthdayDateAtom =
+      Atom(name: 'RegistrationStoreBase.birthdayDate', context: context);
 
   @override
-  String get birthday {
-    _$birthdayAtom.reportRead();
-    return super.birthday;
+  String get birthdayDate {
+    _$birthdayDateAtom.reportRead();
+    return super.birthdayDate;
   }
 
   @override
-  set birthday(String value) {
-    _$birthdayAtom.reportWrite(value, super.birthday, () {
-      super.birthday = value;
+  set birthdayDate(String value) {
+    _$birthdayDateAtom.reportWrite(value, super.birthdayDate, () {
+      super.birthdayDate = value;
     });
   }
 
@@ -185,7 +185,7 @@ phoneNumber: ${phoneNumber},
 countryNumber: ${countryNumber},
 otpCode: ${otpCode},
 firstName: ${firstName},
-birthday: ${birthday},
+birthdayDate: ${birthdayDate},
 nickname: ${nickname},
 gender: ${gender},
 showYou: ${showYou},

@@ -6,6 +6,7 @@ class BirthdayScreenRes {
 
   static const String hintInTextField = "DD/MM/YYYY";
   static const String maskInputField = 'xx/xx/xxxx';
+  static const String dateFormat = 'dd/MM/yyyy';
 
   static const int currentProgress = 2;
   static const int maxProgress = 7; // max progress bar value

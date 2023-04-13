@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:internship_app/registration_screens/create_nickname_screen/store/create_nickname_screen_store.dart';
 import 'package:internship_app/registration_screens/gender_select_screen/gender_select_screen.dart';
 
 import '../../general_ui_widgets/ask_user_button/ask_user_button.dart';
@@ -25,6 +26,9 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   // save buttons in variables to get access of it state
   AskUserButton askUserButtonToShowName =
       const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
+
+  final CreateNicknameScreenStore _createNicknameScreenStore =
+      CreateNicknameScreenStore();
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +122,17 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
       );
 
   SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+        // TODO: specify how make this button color mutable
         text: CreateNicknameScreenRes.mainSwitchButtonText,
+        isFaded: _createNicknameScreenStore.isFadedButtonToNextScreen,
         onPressed: () {
+          print(
+              '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
+          print(
+              '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
+          if (_createNicknameScreenStore.isFadedButtonToNextScreen) return;
           Navigator.pushNamed(context, GenderSelectScreen.routeName);
+
           _registrationStore.showEveryoneRealName =
               askUserButtonToShowName.isPressed;
         },

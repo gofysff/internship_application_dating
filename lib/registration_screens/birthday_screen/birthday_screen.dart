@@ -8,6 +8,7 @@ import '../../general_ui_widgets/progress_bar_indicator.dart';
 import '../../registration_store/registration_store.dart';
 import '../../styling.dart';
 import 'res.dart';
+import 'store/bithday_screen_store.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -19,8 +20,11 @@ class BirthdayScreen extends StatefulWidget {
 
 class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _dateController = TextEditingController();
+
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
+
+  final BirthdayScreenStore _birthdayScreenStore = BirthdayScreenStore();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,20 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             const SizedBox(height: 16),
             beneathInputField,
             const SizedBox(height: 20),
-            buttonToNextScreen,
+            SwitchScreenButton(
+                isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
+                text: BirthdayScreenRes.mainSwitchButtonText,
+                onPressed: () {
+                  // TODO why the color is not changing?
+                  // при hot save цвет меняется как и надо, но сам не обновляется
+                  // при таком подходе не происходит rebuild, хотя он должен быть
+                  print("${_registrationStore.birthdayDate} - birthday date");
+                  print(
+                      "${_birthdayScreenStore.isFadedButtonToNextScreen} - is faded");
+                  print(_birthdayScreenStore.isCorrectDate);
+                  if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
+                  Navigator.pushNamed(context, CreateNicknameScreen.routename);
+                }),
           ],
         ),
       );
@@ -79,7 +96,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ),
           maxLength: 10,
           mask: BirthdayScreenRes.maskInputField,
-          onChange: (value) => _registrationStore.birthday = value,
+          onChange: (value) => _registrationStore.birthdayDate = value,
           keyboardType: TextInputType.datetime,
         ),
       );
@@ -87,9 +104,13 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   Text get beneathInputField => Text(BirthdayScreenRes.textBeneathInputField,
       style: StylingTypicalTextStyles.descriptionTextStyleFaded);
 
-  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
-      text: BirthdayScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        Navigator.pushNamed(context, CreateNicknameScreen.routename);
-      });
+  // late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
+  //     isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
+  //     text: BirthdayScreenRes.mainSwitchButtonText,
+  //     onPressed: () {
+  //       print("${_registrationStore.birthdayDate} - birthday date");
+  //       print("${_birthdayScreenStore.isFadedButtonToNextScreen} - is faded");
+  //       if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
+  //       Navigator.pushNamed(context, CreateNicknameScreen.routename);
+  //     });
 }

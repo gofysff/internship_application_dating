@@ -26,7 +26,7 @@ abstract class RegistrationStoreBase with Store {
   String firstName = "";
 
   @observable
-  String birthday = "";
+  String birthdayDate = "";
 
   @observable
   String nickname = "";
