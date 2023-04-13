@@ -4,12 +4,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/create_nickname_screen/store/create_nickname_screen_store.dart';
 import 'package:internship_app/registration_screens/gender_select_screen/gender_select_screen.dart';
 
-import '../../general_ui_widgets/ask_user_button/ask_user_button.dart';
-import '../../general_ui_widgets/general_app_bar_registration.dart';
-import '../../general_ui_widgets/main_switch_screen_button.dart';
-import '../../general_ui_widgets/progress_bar_indicator.dart';
-import '../../registration_store/registration_store.dart';
-import '../../styling.dart';
+import 'package:internship_app/general_ui_widgets/ask_user_button/ask_user_button.dart';
+import 'package:internship_app/general_ui_widgets/general_app_bar_registration.dart';
+import 'package:internship_app/general_ui_widgets/main_switch_screen_button.dart';
+import 'package:internship_app/general_ui_widgets/progress_bar_indicator.dart';
+import 'package:internship_app/registration_store/registration_store.dart';
+import 'package:internship_app/styling.dart';
 import 'res.dart';
 
 class CreateNicknameScreen extends StatefulWidget {

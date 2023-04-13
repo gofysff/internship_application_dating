@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO: spend time on dividing TextStyles and ask if it makes sense
-
 class StylingFiguresColors {
   static const plugButtonBackground = Color(0xffF2F2F2);
   static const Color backgroundColor = Color(0xffCECECE);

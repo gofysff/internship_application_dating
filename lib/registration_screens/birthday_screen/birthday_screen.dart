@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/create_nickname_screen/create_nickname_screen.dart';
 import 'package:masked_text_field/masked_text_field.dart';
-import '../../general_ui_widgets/general_app_bar_registration.dart';
-import '../../general_ui_widgets/main_switch_screen_button.dart';
-import '../../general_ui_widgets/progress_bar_indicator.dart';
-import '../../registration_store/registration_store.dart';
-import '../../styling.dart';
+import 'package:internship_app/general_ui_widgets/general_app_bar_registration.dart';
+import 'package:internship_app/general_ui_widgets/main_switch_screen_button.dart';
+import 'package:internship_app/general_ui_widgets/progress_bar_indicator.dart';
+import 'package:internship_app/registration_store/registration_store.dart';
+import 'package:internship_app/styling.dart';
 import 'res.dart';
 import 'store/bithday_screen_store.dart';
 

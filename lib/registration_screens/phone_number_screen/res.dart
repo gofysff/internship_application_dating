@@ -12,5 +12,6 @@ class PhoneNumberScreenRes {
   static const String textWithLinkToUserAgreement = "user agreement";
 
   static const String maskTextField = 'xxx-xxx-xx-xx';
-  static const int maxPhoneNumberLength = 13;
+  static const String maskDelimeter = '-';
+  static const int correctPhoneNumberLength = 13;
 }

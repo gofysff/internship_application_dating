@@ -38,6 +38,7 @@ class MainApp extends StatelessWidget {
 
 
 // TODO: 1 try to figure out how customize correctly the keyboard 
+// tODO: make one validator mobx store and replace all validation
+// TODO: add validators to textFields
+// Todo: write logic to http requests to server after and before getting otp code 
 // TODO: 2 specify information about otp timer work
-
-

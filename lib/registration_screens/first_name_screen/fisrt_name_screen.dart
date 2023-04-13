@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/birthday_screen/birthday_screen.dart';
+import 'package:internship_app/registration_screens/first_name_screen/store/first_name_screen_store.dart';
 
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../general_ui_widgets/main_switch_screen_button.dart';
@@ -22,6 +23,8 @@ class FirstNameScreen extends StatefulWidget {
 class _FirstNameScreenState extends State<FirstNameScreen> {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
+
+  final FirstNameScreenStore _firstNameScreenStore = FirstNameScreenStore();
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +82,12 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
   Text beneathInputField = Text(FirstNameScreenRes.textBeneathInputField,
       style: StylingTypicalTextStyles.fadedSlightTextStyle);
 
-  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
-      text: FirstNameScreenRes.mainSwitchButtonText,
-      onPressed: () {
-        Navigator.pushNamed(context, BirthdayScreen.routeName);
-      });
+  Observer get buttonToNextScreen => Observer(
+        builder: (_) => SwitchScreenButton(
+            isFaded: !_firstNameScreenStore.isCorrectedData,
+            text: FirstNameScreenRes.mainSwitchButtonText,
+            onPressed: () {
+              Navigator.pushNamed(context, BirthdayScreen.routeName);
+            }),
+      );
 }

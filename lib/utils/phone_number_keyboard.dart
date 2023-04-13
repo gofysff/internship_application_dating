@@ -82,7 +82,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
         child: MaskedTextField(
           mask: PhoneNumberScreenRes.maskTextField,
           textFieldController: _phoneTextController,
-          maxLength: PhoneNumberScreenRes.maxPhoneNumberLength,
+          maxLength: PhoneNumberScreenRes.correctPhoneNumberLength,
 
           // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
           onChange: (String inputString) {
