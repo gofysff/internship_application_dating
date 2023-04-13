@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/create_nickname_screen/store/create_nickname_screen_store.dart';
 import 'package:internship_app/registration_screens/gender_select_screen/gender_select_screen.dart';
 
@@ -101,6 +102,7 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   TextField get keyboard => TextField(
         onChanged: (value) {
           _registrationStore.nickname = value;
+          _createNicknameScreenStore.setIsFadedisFadedButtonToNextScreen();
         },
         keyboardType: TextInputType.text,
         decoration: const InputDecoration(
@@ -121,20 +123,21 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
         style: StylingTypicalTextStyles.descriptionTextStyleFaded,
       );
 
-  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
-        // TODO: specify how make this button color mutable
-        text: CreateNicknameScreenRes.mainSwitchButtonText,
-        isFaded: _createNicknameScreenStore.isFadedButtonToNextScreen,
-        onPressed: () {
-          print(
-              '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
-          print(
-              '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
-          if (_createNicknameScreenStore.isFadedButtonToNextScreen) return;
-          Navigator.pushNamed(context, GenderSelectScreen.routeName);
+  Observer get buttonToNextScreen => Observer(
+      builder: (_) => SwitchScreenButton(
+            // TODO: specify how make this button color mutable
+            text: CreateNicknameScreenRes.mainSwitchButtonText,
+            isFaded: _createNicknameScreenStore.isFadedButtonToNextScreen,
+            onPressed: () {
+              print(
+                  '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
+              print(
+                  '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
+              if (_createNicknameScreenStore.isFadedButtonToNextScreen) return;
+              Navigator.pushNamed(context, GenderSelectScreen.routeName);
 
-          _registrationStore.showEveryoneRealName =
-              askUserButtonToShowName.isPressed;
-        },
-      );
+              _registrationStore.showEveryoneRealName =
+                  askUserButtonToShowName.isPressed;
+            },
+          ));
 }

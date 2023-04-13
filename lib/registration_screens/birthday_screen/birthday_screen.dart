@@ -55,20 +55,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             const SizedBox(height: 16),
             beneathInputField,
             const SizedBox(height: 20),
-            SwitchScreenButton(
-                isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
-                text: BirthdayScreenRes.mainSwitchButtonText,
-                onPressed: () {
-                  // TODO why the color is not changing?
-                  // при hot save цвет меняется как и надо, но сам не обновляется
-                  // при таком подходе не происходит rebuild, хотя он должен быть
-                  print("${_registrationStore.birthdayDate} - birthday date");
-                  print(
-                      "${_birthdayScreenStore.isFadedButtonToNextScreen} - is faded");
-                  print(_birthdayScreenStore.isCorrectDate);
-                  if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
-                  Navigator.pushNamed(context, CreateNicknameScreen.routename);
-                }),
+            buttonToNextScreen
           ],
         ),
       );
@@ -96,7 +83,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           ),
           maxLength: 10,
           mask: BirthdayScreenRes.maskInputField,
-          onChange: (value) => _registrationStore.birthdayDate = value,
+          onChange: (value) {
+            _registrationStore.birthdayDate = value;
+            _birthdayScreenStore.setIsFadedisFadedButtonToNextScreen();
+          },
           keyboardType: TextInputType.datetime,
         ),
       );
@@ -104,13 +94,12 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   Text get beneathInputField => Text(BirthdayScreenRes.textBeneathInputField,
       style: StylingTypicalTextStyles.descriptionTextStyleFaded);
 
-  // late SwitchScreenButton buttonToNextScreen = SwitchScreenButton(
-  //     isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
-  //     text: BirthdayScreenRes.mainSwitchButtonText,
-  //     onPressed: () {
-  //       print("${_registrationStore.birthdayDate} - birthday date");
-  //       print("${_birthdayScreenStore.isFadedButtonToNextScreen} - is faded");
-  //       if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
-  //       Navigator.pushNamed(context, CreateNicknameScreen.routename);
-  //     });
+  Observer get buttonToNextScreen => Observer(
+      builder: (_) => SwitchScreenButton(
+          isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
+          text: BirthdayScreenRes.mainSwitchButtonText,
+          onPressed: () {
+            if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
+            Navigator.pushNamed(context, CreateNicknameScreen.routename);
+          }));
 }

@@ -5,7 +5,7 @@ part 'create_nickname_screen_store.g.dart';
 
 // ignore: library_private_types_in_public_api
 class CreateNicknameScreenStore = _CreateNicknameStoreBase
-    with _$CreateNicknameStore;
+    with _$CreateNicknameScreenStore;
 
 abstract class _CreateNicknameStoreBase with Store {
   final RegistrationStore _registrationStore =
@@ -25,6 +25,10 @@ abstract class _CreateNicknameStoreBase with Store {
     return validCharacters.hasMatch(_registrationStore.nickname);
   }
 
-  @computed
-  bool get isFadedButtonToNextScreen => !isCorrectNickname;
+  @observable
+  bool isFadedButtonToNextScreen = true;
+
+  void setIsFadedisFadedButtonToNextScreen() {
+    isFadedButtonToNextScreen = !isCorrectNickname;
+  }
 }
