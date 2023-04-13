@@ -100,10 +100,7 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
       );
 
   TextField get keyboard => TextField(
-        onChanged: (value) {
-          _registrationStore.nickname = value;
-          _createNicknameScreenStore.setIsFadedisFadedButtonToNextScreen();
-        },
+        onChanged: (value) => _registrationStore.nickname = value,
         keyboardType: TextInputType.text,
         decoration: const InputDecoration(
           // TODO: change keyboard color
@@ -125,15 +122,14 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
 
   Observer get buttonToNextScreen => Observer(
       builder: (_) => SwitchScreenButton(
-            // TODO: specify how make this button color mutable
             text: CreateNicknameScreenRes.mainSwitchButtonText,
-            isFaded: _createNicknameScreenStore.isFadedButtonToNextScreen,
+            isFaded: !_createNicknameScreenStore.isCorrectNickname,
             onPressed: () {
-              print(
-                  '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
-              print(
-                  '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
-              if (_createNicknameScreenStore.isFadedButtonToNextScreen) return;
+              // print(
+              //     '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
+              // print(
+              //     '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
+              if (!_createNicknameScreenStore.isCorrectNickname) return;
               Navigator.pushNamed(context, GenderSelectScreen.routeName);
 
               _registrationStore.showEveryoneRealName =

@@ -85,7 +85,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           mask: BirthdayScreenRes.maskInputField,
           onChange: (value) {
             _registrationStore.birthdayDate = value;
-            _birthdayScreenStore.setIsFadedisFadedButtonToNextScreen();
           },
           keyboardType: TextInputType.datetime,
         ),
@@ -96,10 +95,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   Observer get buttonToNextScreen => Observer(
       builder: (_) => SwitchScreenButton(
-          isFaded: _birthdayScreenStore.isFadedButtonToNextScreen,
+          isFaded: !_birthdayScreenStore.isCorrectDate,
           text: BirthdayScreenRes.mainSwitchButtonText,
           onPressed: () {
-            if (_birthdayScreenStore.isFadedButtonToNextScreen) return;
+            if (!_birthdayScreenStore.isCorrectDate) return;
             Navigator.pushNamed(context, CreateNicknameScreen.routename);
           }));
 }

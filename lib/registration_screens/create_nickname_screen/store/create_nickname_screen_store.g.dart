@@ -17,28 +17,9 @@ mixin _$CreateNicknameScreenStore on _CreateNicknameStoreBase, Store {
           name: '_CreateNicknameStoreBase.isCorrectNickname'))
       .value;
 
-  late final _$isFadedButtonToNextScreenAtom = Atom(
-      name: '_CreateNicknameStoreBase.isFadedButtonToNextScreen',
-      context: context);
-
-  @override
-  bool get isFadedButtonToNextScreen {
-    _$isFadedButtonToNextScreenAtom.reportRead();
-    return super.isFadedButtonToNextScreen;
-  }
-
-  @override
-  set isFadedButtonToNextScreen(bool value) {
-    _$isFadedButtonToNextScreenAtom
-        .reportWrite(value, super.isFadedButtonToNextScreen, () {
-      super.isFadedButtonToNextScreen = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
-isFadedButtonToNextScreen: ${isFadedButtonToNextScreen},
 isCorrectNickname: ${isCorrectNickname}
     ''';
   }

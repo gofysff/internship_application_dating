@@ -24,11 +24,4 @@ abstract class _CreateNicknameStoreBase with Store {
     //     'nickname is ${_registrationStore.nickname} wih length ${_registrationStore.nickname.length}');
     return validCharacters.hasMatch(_registrationStore.nickname);
   }
-
-  @observable
-  bool isFadedButtonToNextScreen = true;
-
-  void setIsFadedisFadedButtonToNextScreen() {
-    isFadedButtonToNextScreen = !isCorrectNickname;
-  }
 }

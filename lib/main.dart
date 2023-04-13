@@ -40,4 +40,4 @@ class MainApp extends StatelessWidget {
 // TODO: 1 try to figure out how customize correctly the keyboard 
 // TODO: 2 specify information about otp timer work
 
-// TODO: 3: work with RegistrationStore (pre-processing data from the keyboards)
+

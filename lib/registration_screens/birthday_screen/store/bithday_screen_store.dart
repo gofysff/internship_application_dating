@@ -12,16 +12,6 @@ abstract class _BirthdayScreenStoreBase with Store {
   final RegistrationStore _registrationStore =
       RegistrationStoreSingletone.instanceOfStore;
 
-  @observable
-  bool isFadedButtonToNextScreen = true;
-
-  @action
-  void setIsFadedisFadedButtonToNextScreen() {
-    isFadedButtonToNextScreen = !isCorrectDate;
-  }
-
-  //todo: spcify how to make computed fields observable
-  // @observable
   @computed
   bool get isCorrectDate =>
       _registrationStore.birthdayDate.length ==
