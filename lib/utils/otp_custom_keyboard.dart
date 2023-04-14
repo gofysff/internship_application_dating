@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../registration_screens/otp_code_screen/res.dart';
 import '../registration_store/registration_store.dart';
+import '../styling.dart';
 
 class OtpCustomKeyboard extends StatefulWidget {
   const OtpCustomKeyboard({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class OtpCustomKeyboard extends StatefulWidget {
   String toStringShort() => 'Rounded Filled';
 }
 
-// TODO: refactor this class
 class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
   RegistrationStore? _registrationStore;
 
@@ -29,24 +29,6 @@ class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
 
   final controller = TextEditingController();
   final focusNode = FocusNode();
-
-  static const borderColor = Color.fromRGBO(169, 169, 169, 1);
-  static const errorColor = Color.fromRGBO(255, 234, 238, 1);
-  static const fillColor = Color.fromRGBO(255, 255, 255, 1);
-
-  final defaultPinTheme = PinTheme(
-    width: 56,
-    height: 70,
-    textStyle: const TextStyle(
-      fontSize: 22,
-      color: Color.fromRGBO(30, 60, 87, 1),
-    ),
-    decoration: BoxDecoration(
-      color: fillColor,
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.transparent),
-    ),
-  );
 
   @override
   void dispose() {
@@ -70,26 +52,44 @@ class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
           onCompleted: (String pin) {
             _registrationStore!.otpCode = pin;
 
-            //TODO: check if pin is correct with masks
+            //TODO: check if pin is correct with masks and http request here
 
             Navigator.pushNamed(context, FirstNameScreen.routename);
           },
-          focusedPinTheme: defaultPinTheme.copyWith(
-            height: 80,
-            width: 64,
-            decoration: defaultPinTheme.decoration!.copyWith(
-              color: const Color(0xffDEDEDE),
-              border: Border.all(color: borderColor),
-            ),
-          ),
-          errorPinTheme: defaultPinTheme.copyWith(
-            decoration: BoxDecoration(
-              color: errorColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+          focusedPinTheme: focusedPinTheme,
+          errorPinTheme: errorPinTheme,
         ),
       ),
     );
   }
+
+  PinTheme get defaultPinTheme => PinTheme(
+        width: 56,
+        height: 70,
+        textStyle: const TextStyle(
+          fontSize: 22,
+          color: StylingOtpCustomKeyboard.textColor,
+        ),
+        decoration: BoxDecoration(
+          color: StylingOtpCustomKeyboard.fillColor,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.transparent),
+        ),
+      );
+
+  PinTheme get focusedPinTheme => defaultPinTheme.copyWith(
+        height: 80,
+        width: 64,
+        decoration: defaultPinTheme.decoration!.copyWith(
+          color: StylingOtpCustomKeyboard.focusedColor,
+          border: Border.all(color: StylingOtpCustomKeyboard.borderColor),
+        ),
+      );
+
+  PinTheme get errorPinTheme => defaultPinTheme.copyWith(
+        decoration: defaultPinTheme.decoration!.copyWith(
+          color: StylingOtpCustomKeyboard.errorColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+      );
 }

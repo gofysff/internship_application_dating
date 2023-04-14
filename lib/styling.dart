@@ -78,3 +78,12 @@ class StylingTypicalTextStyles {
     color: StylingFontsColors.fadedColor,
   );
 }
+
+class StylingOtpCustomKeyboard {
+  static const borderColor = Color.fromRGBO(169, 169, 169, 1);
+  static const errorColor = Color.fromRGBO(255, 234, 238, 1);
+  static const fillColor = Color.fromRGBO(255, 255, 255, 1);
+
+  static const focusedColor = Color(0xffDEDEDE);
+  static const textColor = Color.fromRGBO(30, 60, 87, 1);
+}
