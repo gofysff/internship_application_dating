@@ -1,5 +1,24 @@
 import 'package:flutter/material.dart';
 
+class StylingMainAplicationTheme {
+  static ThemeData get mainThemeData => ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: StylingOtherColors.cursorColor,
+          selectionColor: StylingOtherColors.cursorColor,
+          selectionHandleColor: StylingOtherColors.cursorColor,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              // style: BorderStyle.solid,
+              color: StylingOtherColors.borderInputFieldColor,
+            ),
+          ),
+        ),
+        useMaterial3: true,
+      );
+}
+
 class StylingFiguresColors {
   static const plugButtonBackground = Color(0xffF2F2F2);
   static const Color backgroundColor = Color(0xffCECECE);
@@ -26,6 +45,9 @@ class StylingOtherColors {
   static const Color coursorTextKeyboardColor = Colors.black;
   static const Color borderAroundTextFieldColor = Colors.grey;
   static const Color textFieldBackgroundColor = Color(0xffF1F0F0);
+
+  static const Color cursorColor = Color(0xff909090);
+  static const Color borderInputFieldColor = cursorColor;
 }
 
 class StylingBasicColors {

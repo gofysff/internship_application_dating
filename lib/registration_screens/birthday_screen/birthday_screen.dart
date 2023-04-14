@@ -83,7 +83,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           textFieldController: _dateController,
           inputDecoration: const InputDecoration(
             counterText: "",
-            border: OutlineInputBorder(),
             hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
             hintText: BirthdayScreenRes.hintInTextField,
           ),

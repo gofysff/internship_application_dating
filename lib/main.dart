@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
+import 'package:internship_app/styling.dart';
 import 'package:provider/provider.dart';
 
 import 'registration_screens/create_nickname_screen/create_nickname_screen.dart';
@@ -25,9 +26,11 @@ class MainApp extends StatelessWidget {
       create: (_) => RegistrationStore(),
       builder: (context, _) => Provider(
         // nesting because of dependencing the stores
-        create: (_) => ValidationStore(Provider.of<RegistrationStore>(context)),
+        create: (_) => ValidationStore(
+          Provider.of<RegistrationStore>(context),
+        ),
         child: MaterialApp(
-          theme: ThemeData(useMaterial3: true),
+          theme: StylingMainAplicationTheme.mainThemeData,
           routes: {
             '/': (context) => const StartScreen(),
             PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
@@ -48,8 +51,7 @@ class MainApp extends StatelessWidget {
 
 
 
-// TODO: 1 try to figure out how customize correctly the keyboard 
-// tODO: make one validator mobx store and replace all validation
-// TODO: add validators to textFields
+
+//? TODO: add validators to textFields
 // Todo: write logic to http requests to server after and before getting otp code 
 // TODO: 2 specify information about otp timer work

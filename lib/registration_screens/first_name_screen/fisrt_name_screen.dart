@@ -78,10 +78,6 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
         builder: (_) => TextField(
           cursorColor: StylingOtherColors.coursorTextKeyboardColor,
           onChanged: (value) => _registrationStore!.firstName = value,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            // TODO: work with colors
-          ),
         ),
       );
 

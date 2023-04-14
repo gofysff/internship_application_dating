@@ -74,7 +74,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
           Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
           const SizedBox(width: 8),
           Text(
-            '+${_registrationStore!.countryNumber}',
+            _registrationStore!.countryNumber,
             style: StylingTypicalTextStyles.descriptionTextStyle,
           ),
           const SizedBox(width: 30),
@@ -90,20 +90,14 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
           mask: PhoneNumberScreenRes.maskTextField,
           textFieldController: _phoneTextController,
           maxLength: PhoneNumberScreenRes.correctPhoneNumberLength,
-
-          // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
           onChange: (String inputString) {
-            // print('Input string: $inputString');
             _registrationStore!.phoneNumber = inputString;
-            // print('${_registrationStore!.phoneNumber} registrationPhoneNumber');
           },
-
-          inputDecoration:
-              const InputDecoration(focusColor: Colors.black, counterText: ""
-                  //? why focusColor not working?
-                  ),
+          inputDecoration: const InputDecoration(
+            focusColor: Colors.black,
+            counterText: "",
+          ),
           keyboardType: TextInputType.phone,
-          // cursorColor: , // TODO check this option for styling
         ),
       );
 }

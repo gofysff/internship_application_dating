@@ -109,9 +109,6 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
         onChanged: (value) => _registrationStore!.nickname = value,
         keyboardType: TextInputType.text,
         decoration: const InputDecoration(
-          // TODO: change keyboard color
-          // fillColor: Color(0xFFE5E5E5), //? why this is not working
-          border: OutlineInputBorder(),
           hintStyle: TextStyle(color: StylingFontsColors.fadedColor),
         ),
       );
