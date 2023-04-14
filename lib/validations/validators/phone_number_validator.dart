@@ -1,4 +1,4 @@
-import '../res.dart';
+import '../../registration_screens/phone_number_screen/res.dart';
 
 class PhoneNumberValidator {
   // show how should look number
@@ -9,7 +9,7 @@ class PhoneNumberValidator {
       return false;
     }
     String phoneNumberWithoutDelimeter =
-        phoneNumber.split(PhoneNumberScreenRes.maskDelimeter).toString();
+        phoneNumber.split(PhoneNumberScreenRes.maskDelimeter).join();
 
     return int.tryParse(phoneNumberWithoutDelimeter) != null ? true : false;
   }

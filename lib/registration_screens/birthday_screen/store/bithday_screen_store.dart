@@ -1,7 +1,7 @@
 import 'package:internship_app/registration_store/registration_store.dart';
 import 'package:mobx/mobx.dart';
 
-import 'bithday_validator.dart';
+import '../../../validations/validators/bithday_validator.dart';
 
 part 'bithday_screen_store.g.dart';
 

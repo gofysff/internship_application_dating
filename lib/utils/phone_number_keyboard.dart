@@ -4,8 +4,10 @@ import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
+import 'package:internship_app/validations/validation_store/validation_store.dart';
 import 'package:masked_text_field/masked_text_field.dart';
 import 'package:internship_app/styling.dart';
+import 'package:provider/provider.dart';
 import '../general_ui_widgets/main_switch_screen_button.dart';
 import '../registration_screens/phone_number_screen/res.dart';
 
@@ -27,8 +29,13 @@ class PhoneNumberKeyboardWidget extends StatefulWidget {
 class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
   final _phoneTextController = TextEditingController();
 
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +74,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
           Flag.fromCode(FlagsCode.RU, height: 24, width: 24),
           const SizedBox(width: 8),
           Text(
-            '+${_registrationStore.countryNumber}',
+            '+${_registrationStore!.countryNumber}',
             style: StylingTypicalTextStyles.descriptionTextStyle,
           ),
           const SizedBox(width: 30),
@@ -86,7 +93,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
 
           // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
           onChange: (String inputString) {
-            _registrationStore.phoneNumber = inputString;
+            _registrationStore!.phoneNumber = inputString;
           },
 
           inputDecoration:

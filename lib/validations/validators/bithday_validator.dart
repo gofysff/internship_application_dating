@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../res.dart';
+import '../../registration_screens/birthday_screen/res.dart';
 
 class BirthdayValidator {
   static bool isCorrectDate(String date) =>

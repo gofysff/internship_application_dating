@@ -3,8 +3,11 @@ import 'package:internship_app/registration_screens/otp_code_screen/otp_code_scr
 
 import 'package:internship_app/utils/phone_number_keyboard.dart';
 import 'package:internship_app/utils/privacy_policy.dart';
+import 'package:internship_app/validations/validation_store/validation_store.dart';
+import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
+import '../../registration_store/registration_store.dart';
 import '../../styling.dart';
 import 'res.dart';
 
@@ -20,6 +23,15 @@ class PhoneNumberScreen extends StatefulWidget {
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   late double widthOfScreen;
   late double heightOfScreen;
+  ValidationStore? _validationStore;
+  // RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _validationStore ??= Provider.of<ValidationStore>(context);
+    //  _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +74,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       );
 
   SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
+        // isFaded: _validationStore.isCorrectPhoneNumber,
         text: PhoneNumberScreenRes.mainSwitchButtonText,
         onPressed: () {
+          print(_validationStore!.isCorrectPhoneNumber);
           Navigator.pushNamed(context, OtpCodeScreen.routename);
         },
       );

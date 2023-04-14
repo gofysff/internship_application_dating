@@ -3,7 +3,7 @@ class FirstNameValidator {
     if (firstName.isEmpty) {
       return false;
     }
-    //TODO: implement checks that is alpha by RegularExpression (Russian and English letter)
-    return true;
+    final validCharacters = RegExp(r'^[a-zA-Zа-яА-Я]+$');
+    return validCharacters.hasMatch(firstName);
   }
 }
