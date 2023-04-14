@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/create_nickname_screen/create_nickname_screen.dart';
+import 'package:internship_app/validations/validation_store/validation_store.dart';
 import 'package:masked_text_field/masked_text_field.dart';
 import 'package:internship_app/general_ui_widgets/general_app_bar_registration.dart';
 import 'package:internship_app/general_ui_widgets/main_switch_screen_button.dart';
 import 'package:internship_app/general_ui_widgets/progress_bar_indicator.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
 import 'package:internship_app/styling.dart';
+import 'package:provider/provider.dart';
 import 'res.dart';
-import 'store/bithday_screen_store.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -21,10 +22,15 @@ class BirthdayScreen extends StatefulWidget {
 class _BirthdayScreenState extends State<BirthdayScreen> {
   final TextEditingController _dateController = TextEditingController();
 
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
+  ValidationStore? _validationStore;
+  RegistrationStore? _registrationStore;
 
-  final BirthdayScreenStore _birthdayScreenStore = BirthdayScreenStore();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _validationStore ??= Provider.of<ValidationStore>(context);
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +90,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
           maxLength: 10,
           mask: BirthdayScreenRes.maskInputField,
           onChange: (value) {
-            _registrationStore.birthdayDate = value;
+            _registrationStore!.birthdayDate = value;
           },
           keyboardType: TextInputType.datetime,
         ),
@@ -95,10 +101,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   Observer get buttonToNextScreen => Observer(
       builder: (_) => SwitchScreenButton(
-          isFaded: !_birthdayScreenStore.isCorrectDate,
+          isFaded: _validationStore!.isCorrectBirthday == false,
           text: BirthdayScreenRes.mainSwitchButtonText,
           onPressed: () {
-            if (!_birthdayScreenStore.isCorrectDate) return;
+            if (_validationStore!.isCorrectBirthday == false) return;
             Navigator.pushNamed(context, CreateNicknameScreen.routename);
           }));
 }

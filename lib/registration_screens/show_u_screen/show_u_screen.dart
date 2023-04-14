@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../general_ui_widgets/list_with_one_selected_button/list_with_one_selected_button.dart';
@@ -18,14 +19,19 @@ class ShowYouScreen extends StatefulWidget {
 }
 
 class _ShowYouScreenState extends State<ShowYouScreen> {
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
-
   // save buttons in variables to get access of it state
 
   ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
     buttonsTextValues: ShowYouScreenRes.buttonValues,
   );
+
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +95,7 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
         text: ShowYouScreenRes.mainSwitchButtonText,
         onPressed: () {
           //  Todo: add navigation to the next screen
-          _registrationStore.showYou = genderList.getSelectedButtonValue;
+          _registrationStore!.showYou = genderList.getSelectedButtonValue;
           print(_registrationStore.toString());
         },
       );

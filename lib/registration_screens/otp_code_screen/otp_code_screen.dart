@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../registration_store/registration_store.dart';
@@ -20,6 +21,14 @@ class OtpCodeScreen extends StatefulWidget {
 }
 
 class _OtpCodeScreenState extends State<OtpCodeScreen> {
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +60,7 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
 
   Observer get descriptionOfLabel => Observer(
         builder: (_) => Text(
-          'Sms sent to ${_registrationStore.fullPhoneNumber}',
+          'Sms sent to ${_registrationStore!.fullPhoneNumber}',
           style: StylingTypicalTextStyles.descriptionTextStyleBigger,
         ),
       );

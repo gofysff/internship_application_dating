@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/otp_code_screen/otp_code_screen.dart';
 
 import 'package:internship_app/utils/phone_number_keyboard.dart';
@@ -73,12 +74,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         style: StylingTypicalTextStyles.labelTextStyle,
       );
 
-  SwitchScreenButton get buttonToNextScreen => SwitchScreenButton(
-        // isFaded: _validationStore.isCorrectPhoneNumber,
-        text: PhoneNumberScreenRes.mainSwitchButtonText,
-        onPressed: () {
-          print(_validationStore!.isCorrectPhoneNumber);
-          Navigator.pushNamed(context, OtpCodeScreen.routename);
-        },
+  Observer get buttonToNextScreen => Observer(
+        builder: (_) => SwitchScreenButton(
+          isFaded: _validationStore!.isCorrectPhoneNumber == false,
+          text: PhoneNumberScreenRes.mainSwitchButtonText,
+          onPressed: () {
+            if (_validationStore!.isCorrectPhoneNumber == false) {
+              return;
+            }
+            Navigator.pushNamed(context, OtpCodeScreen.routename);
+          },
+        ),
       );
 }

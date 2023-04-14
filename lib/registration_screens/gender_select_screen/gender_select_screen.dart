@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:internship_app/registration_screens/show_u_screen/show_u_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/ask_user_button/ask_user_button.dart';
 import '../../general_ui_widgets/general_app_bar_registration.dart';
@@ -21,15 +22,20 @@ class GenderSelectScreen extends StatefulWidget {
 }
 
 class _GenderSelectScreenState extends State<GenderSelectScreen> {
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
-
   // save buttons in variables to get access of it state
   ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
       buttonsTextValues: GenderSelectScreenRes.buttonValues);
 
   AskUserButton askUserButton =
       const AskUserButton(text: GenderSelectScreenRes.askToShowGender);
+
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +114,8 @@ class _GenderSelectScreenState extends State<GenderSelectScreen> {
         text: GenderSelectScreenRes.mainSwitchButtonText,
         onPressed: () {
           Navigator.pushNamed(context, ShowYouScreen.routeName);
-          _registrationStore.gender = genderList.getSelectedButtonValue;
-          _registrationStore.showGenderOnProfile = askUserButton.isPressed;
+          _registrationStore!.gender = genderList.getSelectedButtonValue;
+          _registrationStore!.showGenderOnProfile = askUserButton.isPressed;
         },
       );
 }

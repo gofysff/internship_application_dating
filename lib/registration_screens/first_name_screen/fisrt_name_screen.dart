@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/birthday_screen/birthday_screen.dart';
-import 'package:internship_app/registration_screens/first_name_screen/store/first_name_screen_store.dart';
+import 'package:internship_app/validations/validation_store/validation_store.dart';
+import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../general_ui_widgets/main_switch_screen_button.dart';
@@ -21,10 +22,15 @@ class FirstNameScreen extends StatefulWidget {
 }
 
 class _FirstNameScreenState extends State<FirstNameScreen> {
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
+  ValidationStore? _validationStore;
+  RegistrationStore? _registrationStore;
 
-  final FirstNameScreenStore _firstNameScreenStore = FirstNameScreenStore();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _validationStore ??= Provider.of<ValidationStore>(context);
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +77,7 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
   Observer get keyboard => Observer(
         builder: (_) => TextField(
           cursorColor: StylingOtherColors.coursorTextKeyboardColor,
-          onChanged: (value) => _registrationStore.firstName = value,
+          onChanged: (value) => _registrationStore!.firstName = value,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             // TODO: work with colors
@@ -84,9 +90,12 @@ class _FirstNameScreenState extends State<FirstNameScreen> {
 
   Observer get buttonToNextScreen => Observer(
         builder: (_) => SwitchScreenButton(
-            isFaded: !_firstNameScreenStore.isCorrectedData,
+            isFaded: _validationStore!.isCorrectFirstName == false,
             text: FirstNameScreenRes.mainSwitchButtonText,
             onPressed: () {
+              if (_validationStore!.isCorrectFirstName == false) {
+                return;
+              }
               Navigator.pushNamed(context, BirthdayScreen.routeName);
             }),
       );

@@ -21,24 +21,26 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider(create: (_) => RegistrationStore()),
-        Provider(create: (_) => ValidationStore()),
-      ],
-      child: MaterialApp(
-        theme: ThemeData(useMaterial3: true),
-        routes: {
-          '/': (context) => const StartScreen(),
-          PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
-          OtpCodeScreen.routename: (context) => const OtpCodeScreen(),
-          FirstNameScreen.routename: (context) => const FirstNameScreen(),
-          BirthdayScreen.routeName: (context) => const BirthdayScreen(),
-          CreateNicknameScreen.routename: (context) =>
-              const CreateNicknameScreen(),
-          GenderSelectScreen.routeName: (context) => const GenderSelectScreen(),
-          ShowYouScreen.routeName: (context) => const ShowYouScreen(),
-        },
+    return Provider(
+      create: (_) => RegistrationStore(),
+      builder: (context, _) => Provider(
+        // nesting because of dependencing the stores
+        create: (_) => ValidationStore(Provider.of<RegistrationStore>(context)),
+        child: MaterialApp(
+          theme: ThemeData(useMaterial3: true),
+          routes: {
+            '/': (context) => const StartScreen(),
+            PhoneNumberScreen.routeName: (context) => const PhoneNumberScreen(),
+            OtpCodeScreen.routename: (context) => const OtpCodeScreen(),
+            FirstNameScreen.routename: (context) => const FirstNameScreen(),
+            BirthdayScreen.routeName: (context) => const BirthdayScreen(),
+            CreateNicknameScreen.routename: (context) =>
+                const CreateNicknameScreen(),
+            GenderSelectScreen.routeName: (context) =>
+                const GenderSelectScreen(),
+            ShowYouScreen.routeName: (context) => const ShowYouScreen(),
+          },
+        ),
       ),
     );
   }

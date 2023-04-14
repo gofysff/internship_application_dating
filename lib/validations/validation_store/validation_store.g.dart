@@ -30,13 +30,21 @@ mixin _$ValidationStore on _ValidationStoreBase, Store {
           () => super.isCorrectBirthday,
           name: '_ValidationStoreBase.isCorrectBirthday'))
       .value;
+  Computed<bool>? _$isCorrectPhoneNumberComputed;
+
+  @override
+  bool get isCorrectPhoneNumber => (_$isCorrectPhoneNumberComputed ??=
+          Computed<bool>(() => super.isCorrectPhoneNumber,
+              name: '_ValidationStoreBase.isCorrectPhoneNumber'))
+      .value;
 
   @override
   String toString() {
     return '''
 isCorrectNickname: ${isCorrectNickname},
 isCorrectFirstName: ${isCorrectFirstName},
-isCorrectBirthday: ${isCorrectBirthday}
+isCorrectBirthday: ${isCorrectBirthday},
+isCorrectPhoneNumber: ${isCorrectPhoneNumber}
     ''';
   }
 }

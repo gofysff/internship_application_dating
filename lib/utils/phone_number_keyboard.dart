@@ -4,16 +4,16 @@ import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
-import 'package:internship_app/validations/validation_store/validation_store.dart';
+
 import 'package:masked_text_field/masked_text_field.dart';
 import 'package:internship_app/styling.dart';
 import 'package:provider/provider.dart';
-import '../general_ui_widgets/main_switch_screen_button.dart';
+
 import '../registration_screens/phone_number_screen/res.dart';
 
 class PhoneNumberKeyboardWidget extends StatefulWidget {
   final double widthOfScreen;
-  final SwitchScreenButton buttonToNextScreen;
+  final Widget buttonToNextScreen;
 
   const PhoneNumberKeyboardWidget({
     Key? key,
@@ -93,7 +93,9 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
 
           // cursorColor: StylingOtherColors.coursorTextKeyboardColor,
           onChange: (String inputString) {
+            // print('Input string: $inputString');
             _registrationStore!.phoneNumber = inputString;
+            // print('${_registrationStore!.phoneNumber} registrationPhoneNumber');
           },
 
           inputDecoration:

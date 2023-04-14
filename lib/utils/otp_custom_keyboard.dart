@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/first_name_screen/fisrt_name_screen.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
 import '../registration_screens/otp_code_screen/res.dart';
 import '../registration_store/registration_store.dart';
@@ -18,11 +19,16 @@ class OtpCustomKeyboard extends StatefulWidget {
 
 // TODO: refactor this class
 class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   final controller = TextEditingController();
-  final focusNode = FocusNode(); // TODO: Understand what is it
+  final focusNode = FocusNode();
 
   static const borderColor = Color.fromRGBO(169, 169, 169, 1);
   static const errorColor = Color.fromRGBO(255, 234, 238, 1);
@@ -62,7 +68,7 @@ class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
           focusNode: focusNode,
           defaultPinTheme: defaultPinTheme,
           onCompleted: (String pin) {
-            _registrationStore.otpCode = pin;
+            _registrationStore!.otpCode = pin;
 
             //TODO: check if pin is correct with masks
 

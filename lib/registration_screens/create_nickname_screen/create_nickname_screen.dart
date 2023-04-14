@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:internship_app/registration_screens/create_nickname_screen/store/create_nickname_screen_store.dart';
+
 import 'package:internship_app/registration_screens/gender_select_screen/gender_select_screen.dart';
 
 import 'package:internship_app/general_ui_widgets/ask_user_button/ask_user_button.dart';
@@ -10,6 +10,8 @@ import 'package:internship_app/general_ui_widgets/main_switch_screen_button.dart
 import 'package:internship_app/general_ui_widgets/progress_bar_indicator.dart';
 import 'package:internship_app/registration_store/registration_store.dart';
 import 'package:internship_app/styling.dart';
+import 'package:internship_app/validations/validation_store/validation_store.dart';
+import 'package:provider/provider.dart';
 import 'res.dart';
 
 class CreateNicknameScreen extends StatefulWidget {
@@ -21,15 +23,19 @@ class CreateNicknameScreen extends StatefulWidget {
 }
 
 class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
-  final RegistrationStore _registrationStore =
-      RegistrationStoreSingletone.instanceOfStore;
-
   // save buttons in variables to get access of it state
   AskUserButton askUserButtonToShowName =
       const AskUserButton(text: CreateNicknameScreenRes.askToShowRealName);
 
-  final CreateNicknameScreenStore _createNicknameScreenStore =
-      CreateNicknameScreenStore();
+  ValidationStore? _validationStore;
+  RegistrationStore? _registrationStore;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _validationStore ??= Provider.of<ValidationStore>(context);
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +106,7 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
       );
 
   TextField get keyboard => TextField(
-        onChanged: (value) => _registrationStore.nickname = value,
+        onChanged: (value) => _registrationStore!.nickname = value,
         keyboardType: TextInputType.text,
         decoration: const InputDecoration(
           // TODO: change keyboard color
@@ -123,16 +129,16 @@ class _CreateNicknameScreenState extends State<CreateNicknameScreen> {
   Observer get buttonToNextScreen => Observer(
       builder: (_) => SwitchScreenButton(
             text: CreateNicknameScreenRes.mainSwitchButtonText,
-            isFaded: !_createNicknameScreenStore.isCorrectNickname,
+            isFaded: _validationStore!.isCorrectNickname == false,
             onPressed: () {
               // print(
               //     '${_createNicknameScreenStore.isCorrectNickname} - is correct nickname');
               // print(
               //     '${_createNicknameScreenStore.isFadedButtonToNextScreen} - is faded button}');
-              if (!_createNicknameScreenStore.isCorrectNickname) return;
+              if (_validationStore!.isCorrectNickname == false) return;
               Navigator.pushNamed(context, GenderSelectScreen.routeName);
 
-              _registrationStore.showEveryoneRealName =
+              _registrationStore!.showEveryoneRealName =
                   askUserButtonToShowName.isPressed;
             },
           ));
