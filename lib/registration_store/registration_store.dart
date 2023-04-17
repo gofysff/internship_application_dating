@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
 part 'registration_store.g.dart';
@@ -7,7 +8,10 @@ class RegistrationStoreSingletone {
   static RegistrationStore get instanceOfStore => _instance;
 }
 
-class RegistrationStore = RegistrationStoreBase with _$RegistrationStore;
+@JsonSerializable()
+class RegistrationStore extends RegistrationStoreBase with _$RegistrationStore {
+  Map<String, dynamic> toJson() => _$RegistrationStoreToJson(this);
+}
 
 abstract class RegistrationStoreBase with Store {
   @observable
@@ -19,6 +23,7 @@ abstract class RegistrationStoreBase with Store {
   @computed
   String get fullPhoneNumber => '$countryNumber-$phoneNumber';
 
+  @JsonKey(includeToJson: false)
   @observable
   String? otpCode;
 

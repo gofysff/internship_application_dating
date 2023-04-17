@@ -3,6 +3,36 @@
 part of 'registration_store.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RegistrationStore _$RegistrationStoreFromJson(Map<String, dynamic> json) =>
+    RegistrationStore()
+      ..phoneNumber = json['phoneNumber'] as String
+      ..countryNumber = json['countryNumber'] as String
+      ..otpCode = json['otpCode'] as String?
+      ..firstName = json['firstName'] as String
+      ..birthdayDate = json['birthdayDate'] as String
+      ..nickname = json['nickname'] as String
+      ..gender = json['gender'] as String
+      ..showYou = json['showYou'] as String
+      ..showEveryoneRealName = json['showEveryoneRealName'] as bool
+      ..showGenderOnProfile = json['showGenderOnProfile'] as bool;
+
+Map<String, dynamic> _$RegistrationStoreToJson(RegistrationStore instance) =>
+    <String, dynamic>{
+      'phoneNumber': instance.phoneNumber,
+      'countryNumber': instance.countryNumber,
+      'firstName': instance.firstName,
+      'birthdayDate': instance.birthdayDate,
+      'nickname': instance.nickname,
+      'gender': instance.gender,
+      'showYou': instance.showYou,
+      'showEveryoneRealName': instance.showEveryoneRealName,
+      'showGenderOnProfile': instance.showGenderOnProfile,
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 

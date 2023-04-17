@@ -8,11 +8,16 @@ environment:
 
 dependencies:
   build_runner: ^2.3.3
+  dio: ^5.1.1
   flag: ^6.0.0
   flutter:
     sdk: flutter
   flutter_mobx: ^2.0.6+5
+  flutter_secure_storage: ^8.0.0
   intl: ^0.18.0
+  json_annotation: ^4.8.0
+  json_serializable: ^6.6.1
+  jwt_decoder: ^2.0.1
   masked_text_field: ^1.0.2
   mobx: ^2.1.4
   mobx_codegen: ^2.1.1
