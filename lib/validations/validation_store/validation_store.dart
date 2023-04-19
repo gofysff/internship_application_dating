@@ -3,13 +3,11 @@ import 'package:mobx/mobx.dart';
 
 import 'package:internship_app/registration_store/registration_store.dart';
 
-import '../validators/bithday_validator.dart';
-import '../validators/first_name_validator.dart';
-import '../validators/nickname_validator.dart';
-import '../validators/phone_number_validator.dart';
+import '../validation_values.dart';
 
 part 'validation_store.g.dart';
 
+// ignore: library_private_types_in_public_api
 class ValidationStore = _ValidationStoreBase with _$ValidationStore;
 
 abstract class _ValidationStoreBase with Store {
@@ -17,21 +15,20 @@ abstract class _ValidationStoreBase with Store {
   _ValidationStoreBase(
     this._registrationStore,
   );
-  //! doesn't work because we have to depend from registration store which is providing with us
 
   @computed
   bool get isCorrectNickname =>
-      NicknameValidator.isCorrectNickname(_registrationStore.nickname);
+      ValidationValues.nickname.isValid(_registrationStore.nickname);
 
   @computed
   bool get isCorrectFirstName =>
-      FirstNameValidator.isCorrectFirstName(_registrationStore.firstName);
+      ValidationValues.firstName.isValid(_registrationStore.firstName);
 
   @computed
   bool get isCorrectBirthday =>
-      BirthdayValidator.isCorrectDate(_registrationStore.birthdayDate);
+      ValidationValues.birthday.isValid(_registrationStore.birthdayDate);
 
   @computed
   bool get isCorrectPhoneNumber =>
-      PhoneNumberValidator.isPhoneNumberCorrect(_registrationStore.phoneNumber);
+      ValidationValues.phoneNumber.isValid(_registrationStore.phoneNumber);
 }

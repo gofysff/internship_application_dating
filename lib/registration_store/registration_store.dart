@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
+import 'to_json_interface.dart';
+
 part 'registration_store.g.dart';
 
 class RegistrationStoreSingletone {
@@ -9,7 +11,10 @@ class RegistrationStoreSingletone {
 }
 
 @JsonSerializable()
-class RegistrationStore extends RegistrationStoreBase with _$RegistrationStore {
+class RegistrationStore extends RegistrationStoreBase
+    with _$RegistrationStore
+    implements ToJsonInterface {
+  @override
   Map<String, dynamic> toJson() => _$RegistrationStoreToJson(this);
 }
 

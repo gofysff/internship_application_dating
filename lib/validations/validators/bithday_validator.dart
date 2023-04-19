@@ -1,9 +1,11 @@
 import 'package:intl/intl.dart';
 
 import '../../registration_screens/birthday_screen/res.dart';
+import 'is_valid_interface.dart';
 
-class BirthdayValidator {
-  static bool isCorrectDate(String date) =>
+class BirthdayValidator implements IsValidInterface {
+  @override
+  bool isValid(String date) =>
       date.length == BirthdayScreenRes.dateFormat.length &&
       _isDate(date, BirthdayScreenRes.dateFormat);
 

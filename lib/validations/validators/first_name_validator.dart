@@ -1,5 +1,8 @@
-class FirstNameValidator {
-  static bool isCorrectFirstName(String firstName) {
+import 'is_valid_interface.dart';
+
+class FirstNameValidator implements IsValidInterface {
+  @override
+  bool isValid(String firstName) {
     if (firstName.isEmpty) {
       return false;
     }
