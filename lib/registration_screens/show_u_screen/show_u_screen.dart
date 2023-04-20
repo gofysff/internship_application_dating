@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship_app/registration_screens/show_u_screen/store/server_interaction.dart';
 import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/general_app_bar_registration.dart';
@@ -20,6 +21,8 @@ class ShowYouScreen extends StatefulWidget {
 
 class _ShowYouScreenState extends State<ShowYouScreen> {
   // save buttons in variables to get access of it state
+  final ServerInteractionShowUScreen _serverInteractionShowUScreen =
+      ServerInteractionShowUScreen();
 
   ListWithOneSelectedButton genderList = ListWithOneSelectedButton(
     buttonsTextValues: ShowYouScreenRes.buttonValues,
@@ -96,6 +99,9 @@ class _ShowYouScreenState extends State<ShowYouScreen> {
         onPressed: () {
           //  Todo: add navigation to the next screen
           _registrationStore!.showYou = genderList.getSelectedButtonValue;
+          // TODO: uncomment this line when server will be ready
+          // _serverInteractionShowUScreen
+          //     .sendAllInfoAboutUser(_registrationStore!);
           print(_registrationStore.toString());
         },
       );

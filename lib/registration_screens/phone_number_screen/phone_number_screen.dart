@@ -9,8 +9,10 @@ import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
 
+import '../../registration_store/registration_store.dart';
 import '../../styling.dart';
 import 'res.dart';
+import 'store/server_interaction.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
   static const String routeName = '/phone_number_screen';
@@ -25,13 +27,15 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   late double widthOfScreen;
   late double heightOfScreen;
   ValidationStore? _validationStore;
-  // RegistrationStore? _registrationStore;
+  RegistrationStore? _registrationStore;
+  final ServerInteractionPhoneNumberScreen _serverInteractionPhoneNumberScreen =
+      ServerInteractionPhoneNumberScreen();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _validationStore ??= Provider.of<ValidationStore>(context);
-    //  _registrationStore ??= Provider.of<RegistrationStore>(context);
+    _registrationStore ??= Provider.of<RegistrationStore>(context);
   }
 
   @override
@@ -82,6 +86,9 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             if (_validationStore!.isCorrectPhoneNumber == false) {
               return;
             }
+            // TODO: uncomment this line when server will be ready
+            // _serverInteractionPhoneNumberScreen
+            //     .sendPhoneNumber(_registrationStore!.phoneNumber);
             Navigator.pushNamed(context, OtpCodeScreen.routename);
           },
         ),

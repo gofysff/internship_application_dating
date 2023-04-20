@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../res.dart';
 import '../../../registration_store/registration_store.dart';
 import '../../../styling.dart';
+import '../store/server_interaction.dart';
 
 class OtpCustomKeyboard extends StatefulWidget {
   const OtpCustomKeyboard({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class OtpCustomKeyboard extends StatefulWidget {
 
 class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
   RegistrationStore? _registrationStore;
+  final ServerInteractionOtpCodeScreen _serverInteractionOtpCodeScreen =
+      ServerInteractionOtpCodeScreen();
 
   @override
   void didChangeDependencies() {
@@ -53,7 +56,8 @@ class _OtpCustomKeyboardState extends State<OtpCustomKeyboard> {
             _registrationStore!.otpCode = pin;
 
             //TODO: check if pin is correct with masks and http request here
-
+            // TODO: uncomment this line when server will be ready
+            // _serverInteractionOtpCodeScreen.sendOtp(pin);
             Navigator.pushNamed(context, FirstNameScreen.routename);
           },
           focusedPinTheme: focusedPinTheme,
