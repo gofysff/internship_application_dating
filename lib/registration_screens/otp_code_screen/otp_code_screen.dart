@@ -5,12 +5,9 @@ import 'package:provider/provider.dart';
 import '../../general_ui_widgets/general_app_bar_registration.dart';
 import '../../registration_store/registration_store.dart';
 import '../../styling.dart';
-import '../../utils/otp_custom_keyboard.dart';
-import '../../utils/timer_get_sms_again_widget.dart';
+import 'utils/otp_custom_keyboard.dart';
+import 'utils/timer_get_sms_again_widget.dart';
 import 'res.dart';
-
-final RegistrationStore _registrationStore =
-    RegistrationStoreSingletone.instanceOfStore;
 
 class OtpCodeScreen extends StatefulWidget {
   const OtpCodeScreen({super.key});
