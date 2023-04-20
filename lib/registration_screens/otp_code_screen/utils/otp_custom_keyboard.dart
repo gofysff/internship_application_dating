@@ -4,9 +4,9 @@ import 'package:internship_app/registration_screens/first_name_screen/fisrt_name
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
-import '../registration_screens/otp_code_screen/res.dart';
-import '../registration_store/registration_store.dart';
-import '../styling.dart';
+import '../res.dart';
+import '../../../registration_store/registration_store.dart';
+import '../../../styling.dart';
 
 class OtpCustomKeyboard extends StatefulWidget {
   const OtpCustomKeyboard({Key? key}) : super(key: key);

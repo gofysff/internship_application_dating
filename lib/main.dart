@@ -55,3 +55,4 @@ class MainApp extends StatelessWidget {
 //? TODO: add validators to textFields
 // Todo: write logic to http requests to server after and before getting otp code 
 // TODO: 2 specify information about otp timer work
+// TODO: https://dart.dev/guides/language/effective-dart/design says that styling written uncoorrectly

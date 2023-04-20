@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/otp_code_screen/otp_code_screen.dart';
 
-import 'package:internship_app/utils/phone_number_keyboard.dart';
-import 'package:internship_app/utils/privacy_policy.dart';
+import 'package:internship_app/registration_screens/phone_number_screen/utils/phone_number_keyboard.dart';
+import 'package:internship_app/registration_screens/phone_number_screen/utils/privacy_policy.dart';
 import 'package:internship_app/validations/validation_store/validation_store.dart';
 import 'package:provider/provider.dart';
 
 import '../../general_ui_widgets/main_switch_screen_button.dart';
-import '../../registration_store/registration_store.dart';
+
 import '../../styling.dart';
 import 'res.dart';
 

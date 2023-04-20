@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../registration_screens/otp_code_screen/res.dart';
-import '../styling.dart';
+import '../res.dart';
+import '../../../styling.dart';
 
 class TimerGetSmsAgainWidget extends StatefulWidget {
   const TimerGetSmsAgainWidget({super.key});
