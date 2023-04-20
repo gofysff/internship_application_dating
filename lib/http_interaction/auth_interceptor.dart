@@ -8,67 +8,11 @@ enum TokenErrorType { failedToRegenerateAccessToken, refreshTokenHasExpired }
 class AuthInterceptor extends Interceptor {
   //! this interceptor was not tested yet
   final Dio _dio;
+  // TODO: inject secureStorage
   late final SecureStorageTokens
       _localStorage; // Here we storage our refrech token
 
   AuthInterceptor(this._dio);
-
-  @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    if (options.headers["requiresToken"] == false) {
-      // if the request doesn't need token, then just continue to the next interceptor
-      options.headers.remove("requiresToken"); //remove the auxiliary header
-      return handler.next(options);
-    }
-
-    //! method for get access tokens from local storage now doesn't work
-    final accessToken = _localStorage.accessToken;
-    final refreshToken = await _localStorage.refreshToken;
-
-    if (accessToken == null || refreshToken == null) {
-      // create custom dio error
-      options.extra["tokenErrorType"] =
-          TokenErrorType.failedToRegenerateAccessToken;
-      final error =
-          DioError(requestOptions: options, type: DioErrorType.unknown);
-
-      return handler.reject(error);
-    }
-
-    var _refreshed = true;
-
-    final accessTokenHasExpired = JwtDecoder.isExpired(accessToken);
-    final refreshTokenHasExpired = JwtDecoder.isExpired(refreshToken);
-    if (refreshTokenHasExpired) {
-      _performLogout(_dio);
-
-      // create custom dio error
-      options.extra["tokenErrorType"] = TokenErrorType.refreshTokenHasExpired;
-      final error =
-          DioError(requestOptions: options, type: DioErrorType.unknown);
-
-      return handler.reject(error);
-    } else if (accessTokenHasExpired) {
-      // regenerate access token
-      // _dio.interceptors.requestLock.lock();
-      _refreshed = await _regenerateAccessToken();
-      // _dio.interceptors.requestLock.unlock();
-    }
-
-    if (_refreshed) {
-      // add access token to the request header
-      options.headers["Authorization"] = "Bearer $accessToken";
-      return handler.next(options);
-    } else {
-      // create custom dio error
-      options.extra["tokenErrorType"] =
-          TokenErrorType.failedToRegenerateAccessToken;
-      final error =
-          DioError(requestOptions: options, type: DioErrorType.unknown);
-      return handler.reject(error);
-    }
-  }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
@@ -77,13 +21,93 @@ class AuthInterceptor extends Interceptor {
       // then we should navigate the user back to login page
 
       _performLogout(_dio);
-
+      // TODO: navigate to login page
       // create custom dio error
       // err.type = DioErrorType.other;
       // err.requestOptions.extra["tokenErrorType"] = TokenErrorType.invalidAccessToken;
     }
 
     return handler.next(err);
+  }
+
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    if (options.headers["requiresToken"] == false) {
+      return _removeAuxiliaryRequierTokenHeader(options, handler);
+    }
+
+    //! method for get access tokens from local storage now doesn't work
+    final accessToken = _localStorage.accessToken;
+    final refreshToken = await _localStorage.refreshToken;
+
+    if (accessToken == null || refreshToken == null) {
+      return _allTokensNullOnRequest(options, handler);
+    }
+
+    var refreshed = true;
+
+    final accessTokenHasExpired = JwtDecoder.isExpired(accessToken);
+    final refreshTokenHasExpired = JwtDecoder.isExpired(refreshToken);
+    if (refreshTokenHasExpired) {
+      return _refreshTokenHasExpiredOnRequest(options, handler);
+    } else if (accessTokenHasExpired) {
+      // regenerate access token
+      // _dio.interceptors.requestLock.lock();
+      refreshed = await _regenerateAccessToken();
+      // _dio.interceptors.requestLock.unlock();
+    }
+
+    if (refreshed) {
+      return _addNewHeaderAfterRefresh(options, accessToken, handler);
+    } else {
+      return _failedToRefreshTokens(options, handler);
+    }
+  }
+
+  void _removeAuxiliaryRequierTokenHeader(
+      RequestOptions options, RequestInterceptorHandler handler) {
+    // if the request doesn't need token, then just continue to the next interceptor
+    options.headers.remove("requiresToken"); //remove the auxiliary header
+    return handler.next(options);
+  }
+
+  void _failedToRefreshTokens(
+      RequestOptions options, RequestInterceptorHandler handler) {
+    // create custom dio error
+    options.extra["tokenErrorType"] =
+        TokenErrorType.failedToRegenerateAccessToken;
+    final error = DioError(requestOptions: options, type: DioErrorType.unknown);
+    return handler.reject(error);
+  }
+
+  void _addNewHeaderAfterRefresh(RequestOptions options, String accessToken,
+      RequestInterceptorHandler handler) {
+    // add access token to the request header
+    options.headers["Authorization"] = "Bearer $accessToken";
+    return handler.next(options);
+  }
+
+  void _refreshTokenHasExpiredOnRequest(
+      RequestOptions options, RequestInterceptorHandler handler) {
+    _performLogout(_dio);
+
+    // create custom dio error
+    options.extra["tokenErrorType"] = TokenErrorType.refreshTokenHasExpired;
+    final error = DioError(requestOptions: options, type: DioErrorType.unknown);
+
+    return handler.reject(error);
+  }
+
+  void _allTokensNullOnRequest(
+      RequestOptions options, RequestInterceptorHandler handler) {
+    // TODO: specify what to do with it
+    // create custom dio error
+    options.extra["tokenErrorType"] =
+        TokenErrorType.failedToRegenerateAccessToken;
+    final error = DioError(requestOptions: options, type: DioErrorType.unknown);
+
+    return handler.reject(error);
   }
 
   void _performLogout(Dio dio) {
