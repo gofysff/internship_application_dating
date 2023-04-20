@@ -58,14 +58,17 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
         ),
       );
 
-  Widget get completeWrappedKeyboard => Container(
-        decoration: BoxDecoration(
-          color: StylingOtherColors.textFieldBackgroundColor,
-          borderRadius: BorderRadius.circular(16),
-          border:
-              Border.all(color: StylingOtherColors.borderAroundTextFieldColor),
+  Widget get completeWrappedKeyboard => SizedBox(
+        height: 50,
+        child: Container(
+          decoration: BoxDecoration(
+            color: StylingOtherColors.textFieldBackgroundColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: StylingOtherColors.borderAroundTextFieldColor),
+          ),
+          child: completeKeyboardWithoutWraping,
         ),
-        child: completeKeyboardWithoutWraping,
       );
 
   Widget get completeKeyboardWithoutWraping => Row(
@@ -85,6 +88,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
   // part of keyboard only where we can input number
   Widget get keyboardField => SizedBox(
         width: widget.widthOfScreen - 106 - 16 * 2,
+
         // width limitation because of Row
         child: MaskedTextField(
           mask: PhoneNumberScreenRes.maskTextField,
@@ -94,6 +98,7 @@ class _PhoneNumberKeyboardWidgetState extends State<PhoneNumberKeyboardWidget> {
             _registrationStore!.phoneNumber = inputString;
           },
           inputDecoration: const InputDecoration(
+            focusedBorder: InputBorder.none,
             focusColor: Colors.black,
             counterText: "",
           ),

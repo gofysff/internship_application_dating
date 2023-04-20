@@ -19,6 +19,8 @@ class OtpCodeScreen extends StatefulWidget {
 
 class _OtpCodeScreenState extends State<OtpCodeScreen> {
   RegistrationStore? _registrationStore;
+  TimerGetSmsAgainWidget timerGetSmsAgainWithText =
+      const TimerGetSmsAgainWidget();
 
   @override
   void didChangeDependencies() {
@@ -61,7 +63,4 @@ class _OtpCodeScreenState extends State<OtpCodeScreen> {
           style: StylingTypicalTextStyles.descriptionTextStyleBigger,
         ),
       );
-
-  TimerGetSmsAgainWidget get timerGetSmsAgainWithText =>
-      const TimerGetSmsAgainWidget();
 }

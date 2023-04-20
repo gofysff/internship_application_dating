@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:internship_app/registration_screens/otp_code_screen/otp_code_screen.dart';
+import 'package:internship_app/registration_screens/otp_code_screen/store/timer_store.dart/timer_store.dart';
 
 import 'package:internship_app/registration_screens/phone_number_screen/utils/phone_number_keyboard.dart';
 import 'package:internship_app/registration_screens/phone_number_screen/utils/privacy_policy.dart';
@@ -89,6 +90,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             // TODO: uncomment this line when server will be ready
             // _serverInteractionPhoneNumberScreen
             //     .sendPhoneNumber(_registrationStore!.phoneNumber);
+            TimerStateStore.singletoneInstance.isStarted = true;
             Navigator.pushNamed(context, OtpCodeScreen.routename);
           },
         ),
