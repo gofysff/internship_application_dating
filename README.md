@@ -13,7 +13,7 @@
 
 <table>
     <tr>
-    <td><img src="readme_assets/1_start_screen.png" width=270 height=450></td>
+    <td><img src="readme_assets/1_start_screen.png" width=240 height=450></td>
     <td><img src="readme_assets/2_phone_number.png" width=270 height=450></td>
     <td><img src="readme_assets/3_OTP_code.png" width=270 height=450></td>
 </tr>
