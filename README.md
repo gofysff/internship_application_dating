@@ -14,8 +14,8 @@
 <table>
     <tr>
     <td><img src="readme_assets/1_start_screen.png" width=240 height=450></td>
-    <td><img src="readme_assets/2_phone_number.png" width=270 height=450></td>
-    <td><img src="readme_assets/3_OTP_code.png" width=270 height=450></td>
+    <td><img src="readme_assets/2_phone_number.png" width=240 height=450></td>
+    <td><img src="readme_assets/3_OTP_code.png" width=240 height=450></td>
 </tr>
 </table>
 <!-- ![Start screen](readme_assets/1_start_screen.png)
@@ -27,13 +27,13 @@
 
 <table>
     <tr>
-        <td><img src="readme_assets/4_your_first_name_is.png" width=270 height=450></td>
-        <td><img src="readme_assets/5_your_birthday_is.png" width=270 height=450></td>
-        <td><img src="readme_assets/6_your_nickname.png" width=270 height=450></td>
+        <td><img src="readme_assets/4_your_first_name_is.png" width=240 height=450></td>
+        <td><img src="readme_assets/5_your_birthday_is.png" width=240 height=450></td>
+        <td><img src="readme_assets/6_your_nickname.png" width=240 height=450></td>
     </tr>
     <tr>
-        <td><img src="readme_assets/7_you_are_a.png" width=270 height=450></td>
-        <td><img src="readme_assets/8_show_you.png" width=270 height=450></td>
+        <td><img src="readme_assets/7_you_are_a.png" width=240 height=450></td>
+        <td><img src="readme_assets/8_show_you.png" width=240 height=450></td>
 
     </tr>
 </table>
